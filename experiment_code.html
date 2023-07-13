@@ -2,10 +2,285 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Add JsPsych -->
+    <script src="https://unpkg.com/jspsych@7.3.2"></script>
+    <!-- Keybord response plugin -->
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.2"></script>
+    <!-- Image Keybord response plugin -->
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.2"></script>
+    <!-- Preload plugin to preload images -->
+    <script src="https://unpkg.com/@jspsych/plugin-preload@1.1.2"></script>
+    <!-- Button Response Plugin -->
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
+     <!-- Image button response plugin -->
+     <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
+    
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+
+
+
+    <!-- Style from JsPsych -->
+    <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <!-- JsPsych script -->
+    <script>
+       // Note that participant's response 0 corresponds to Yes and 1 corresponds to No. 
+        // Bootstrap
+        document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">')
+        document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/experiment_css.css" type="text/css">')
+        // Initialise and make data display at the end.
+        var jsPsych = initJsPsych({
+            on_finish: function(){
+                window.location = "https://app.prolific.co/"
+            }
+            });
+
+        // The timeline is an array that contains the set of trials we want to run in the experiment.
+        var timeline = [];
+        // Prelod all images before the experiment begins to avoid waiting time later. 
+        var preload = {
+            type: jsPsychPreload,
+            images: [] };
+            timeline.push(preload);
+
+
+        var welcome = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: ' <p style="margin-top:2%;"><b>Welcome!</b></p><p style="font-size:100%;margin-left:10%;margin-right:10%;">We are Dean McHugh and Tomasz Klochowicz from the University of Amsterdam. At the beginning, we would like to thank you for your participation in this study. It should take you no more than 15 minutes to answer all the questions. </p> <p style="font-size:100%;margin-left:10%;margin-right:10%;">The questions do not have "right" or "wrong" answers. Some of the questions may seem similar, but please answer all of them. The survey does not aim to test your general knowledge. Some of the questions may refer to real people or events, but the stories in the questions are completely made up for the sole purpose of this survey. If a story seems false or implausible to you, try to imagine the situation described by the story. If you have any questions, you can contact us by e-mail at: t.j.klochowicz@uva.nl.</p>',
+            choices: ['OK'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            };
+        // Push the welcome trial to the timeline
+        timeline.push(welcome);
+
+        var consent = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: ` 
+                <div class='row'> 
+                    <div class = 'col consent'>
+                        <h2 style='text-align:center;margin-bottom:2%'>Informed Consent</h2>
+                        <hr>
+                        <p>By clicking the button 'Accept and continue' below you declare that:</p>
+
+                        <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
+
+                        <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
+
+                        <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
+
+                        <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
+                        <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
+                        <p>By clicking the button 'Accept and continue' below you consent to:</p>
+                        <ul>
+                            <li>Participate in this research </li>
+                            <li>Storage and processing of the anonymized data. </li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            choices: ['Decline and exit', '<b> Accept and continue</b>'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            on_finish: function(data){
+            // Cheeck if consent the response as correct or incorrect.
+            if(data.response == 1){
+            data.correct = true;
+            } else {
+            data.correct = false; 
+            }
+        }
+            };
+            var if_consent_trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<b>We cannot collect data from you without your consent. </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+        on_finish: function(){
+            window.location = 'https://app.prolific.co/'
+        },
+    trial_duration: 5000,
+    post_trial_gap: 1000,
+    };
+
+    var if_consent_node = {
+        timeline: [if_consent_trial],
+        conditional_function: function(){
+            var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+            if(last_trial_correct){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+        // Push the welcome trial to the timeline
+        // timeline.push(consent, if_consent_node);
     
+    // Loop until the consent is given. To avoid 'go back' bug: previously it was possible to go back after being redirected and skip that question.
+    var loop_node = {
+    timeline: [consent, if_consent_node],
+    loop_function: function(data){
+        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    };
+
+timeline.push(loop_node);
+
+    var native = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
+            {
+            prompt: "Are you a native speaker of English?", 
+            options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
+            required: true
+            }   
+        ],
+        on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response.Q0 == 'I am a native speaker of English.'){
+        data.correct = true;
+        } else {
+        data.correct = false; 
+        }
+    },
+    // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
+    };
+    var if_trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+        on_finish: function(){
+            window.location = 'https://app.prolific.co/'
+        },
+    trial_duration: 5000,
+    post_trial_gap: 1000,
+};
+
+var if_node = {
+    timeline: [if_trial],
+    conditional_function: function(){
+        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+        if(last_trial_correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+// Push the question about the native language and redirect if wrong answer
+var loop_node = {
+    timeline: [native, if_node],
+    loop_function: function(data){
+        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    };
+
+timeline.push(loop_node);
+// Add instructions and a delay after they appear
+    var instructions = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: `
+                <p>Here you will see some instructions</p>
+
+            `,
+            choices: ['OK'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            post_trial_gap: 400
+            };
+
+        // Push the instructions trial to the timeline
+        timeline.push(instructions);
+
+
+        // Set up another trial but substitute the value of the parameter in from the timeline variables.
+var test = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['Accurate', 'Inaccurate'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        question_type: jsPsych.timelineVariable('question_type'),
+        context_type: jsPsych.timelineVariable('context_type'),
+        response_type: jsPsych.timelineVariable('response_type'),
+        items: jsPsych.timelineVariable('items')
+    },
+    };
+
+    var test_stimuli = [
+{ stimulus:` 
+ 
+ <div class='row'>
+     <div class='col'>
+         <img src='img/info.png' style='width:80px;height:auto;margin-bottom:4%;margin-top:-5px;'></img>
+     </div>
+ </div>
+ <div class='row' style='margin-bottom:4%;font-size:110%;'>
+     <div class = 'col' style='text-align:left'>
+         <p style='margin-bottom:15px;'><i>Bill is in London at a tourist office. He wants to know more about the tourist pass they offer. He asks the employee of the office:</i></p>
+         <div style='margin-left:40px'>    <span style='font-variant:small-caps;'>Bill: </span><span class= white-space-bill>Am I allowed to go to <strong>Big Ben or the London Eye</strong> with this pass?</span><br>
+             <span style='font-variant:small-caps;'>Employee: </span><strong>Yes</strong> </div>
+     </div> 
+ </div>
+ <div class='row'>
+     <div class='col'>
+         <img src='contexts/Ben-Eye_neither.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>
+     </div>
+ </div>
+ <div>
+ </div>
+ <div>
+ <p style='font-size:110%;'>Was the employee's answer accurate given the picture?</p>
+ </div>
+
+` , 
+question_type: 'test', 
+context_type: 'neither', 
+response_type: 'Yes', 
+items: 'Big Ben, the London Eye', 
+scenario: 'tourist office', 
+condition: 'false', 
+
+} ]
+
+// 
+var test_procedure = {
+    // Display fixation cross and then a test stimuli
+    timeline: [fixation, test],
+    // link the variables from the stimuli array with the test trial boilerplate
+    timeline_variables: test_stimuli,
+    // Display stimuli at random (with repetition etc!!!) For randomize order use sample 
+    sample: {
+    type: 'alternate-groups',
+    groups: [tests_numbers_1, tests_numbers_2, filler_numbers],  
+    },
+    randomize_order: true,
+    // Repeat 5 times
+    repetitions: 1,
+    };
+
+// Push the  test precedure to timeline
+timeline.push(test_procedure);
+
+var debrief_block = {
+    type: jsPsychHtmlKeyboardResponse,
+    trial_duration: 2000,
+    stimulus: " <p style='font-size:110%;'> Thank you for taking part in the experiment! </p>  <p style='font-size:110%;'>You will be redirected to prolific to confirm your participation and completion.</p>"
+    };
+timeline.push(debrief_block);
+
+
+// Run the timeline
+jsPsych.run(timeline);
+    </script>
 </body>
 </html>
