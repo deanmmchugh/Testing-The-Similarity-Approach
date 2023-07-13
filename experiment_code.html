@@ -44,7 +44,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: [] };
+            images: ['img/illclogo.jpg'] };
             timeline.push(preload);
 
 
@@ -203,73 +203,59 @@ timeline.push(loop_node);
 
 
         // Set up another trial but substitute the value of the parameter in from the timeline variables.
-var test = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
-    choices: ['Accurate', 'Inaccurate'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
-    data: {
-        question_type: jsPsych.timelineVariable('question_type'),
-        context_type: jsPsych.timelineVariable('context_type'),
-        response_type: jsPsych.timelineVariable('response_type'),
-        items: jsPsych.timelineVariable('items')
-    },
-    };
+// var test = {
+//     type: jsPsychHtmlButtonResponse,
+//     stimulus:jsPsych.timelineVariable('stimulus'),
+//     choices: ['Accurate', 'Inaccurate'],
+//     button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+//     data: {
+//         question_type: jsPsych.timelineVariable('question_type'),
+//         context_type: jsPsych.timelineVariable('context_type'),
+//         response_type: jsPsych.timelineVariable('response_type'),
+//         items: jsPsych.timelineVariable('items')
+//     },
+//     };
 
-    var test_stimuli = [
-{ stimulus:` 
+//     var test_stimuli = [
+// { stimulus:` 
  
- <div class='row'>
-     <div class='col'>
-         <img src='img/info.png' style='width:80px;height:auto;margin-bottom:4%;margin-top:-5px;'></img>
-     </div>
- </div>
- <div class='row' style='margin-bottom:4%;font-size:110%;'>
-     <div class = 'col' style='text-align:left'>
-         <p style='margin-bottom:15px;'><i>Bill is in London at a tourist office. He wants to know more about the tourist pass they offer. He asks the employee of the office:</i></p>
-         <div style='margin-left:40px'>    <span style='font-variant:small-caps;'>Bill: </span><span class= white-space-bill>Am I allowed to go to <strong>Big Ben or the London Eye</strong> with this pass?</span><br>
-             <span style='font-variant:small-caps;'>Employee: </span><strong>Yes</strong> </div>
-     </div> 
- </div>
- <div class='row'>
-     <div class='col'>
-         <img src='contexts/Ben-Eye_neither.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>
-     </div>
- </div>
- <div>
- </div>
- <div>
- <p style='font-size:110%;'>Was the employee's answer accurate given the picture?</p>
- </div>
+//  <div class='row'>
+//      <div class='col'>
+//          <img src='img/illclogo.jpg' style='width:80px;height:auto;margin-bottom:4%;margin-top:-5px;'></img>
+//      </div>
+//  </div>
+//  <div>
+//  <p style='font-size:110%;'>Is ?</p>
+//  </div>
 
-` , 
-question_type: 'test', 
-context_type: 'neither', 
-response_type: 'Yes', 
-items: 'Big Ben, the London Eye', 
-scenario: 'tourist office', 
-condition: 'false', 
+// ` , 
+// question_type: 'test', 
+// context_type: 'neither', 
+// response_type: 'Yes', 
+// items: 'Big Ben, the London Eye', 
+// scenario: 'tourist office', 
+// condition: 'false', 
 
-} ]
+// } ]
 
-// 
-var test_procedure = {
-    // Display fixation cross and then a test stimuli
-    timeline: [fixation, test],
-    // link the variables from the stimuli array with the test trial boilerplate
-    timeline_variables: test_stimuli,
-    // Display stimuli at random (with repetition etc!!!) For randomize order use sample 
-    sample: {
-    type: 'alternate-groups',
-    groups: [tests_numbers_1, tests_numbers_2, filler_numbers],  
-    },
-    randomize_order: true,
-    // Repeat 5 times
-    repetitions: 1,
-    };
+// // 
+// var test_procedure = {
+//     // Display fixation cross and then a test stimuli
+//     timeline: [fixation, test],
+//     // link the variables from the stimuli array with the test trial boilerplate
+//     timeline_variables: test_stimuli,
+//     // Display stimuli at random (with repetition etc!!!) For randomize order use sample 
+//     sample: {
+//     type: 'alternate-groups',
+//     groups: [tests_numbers_1, tests_numbers_2, filler_numbers],  
+//     },
+//     randomize_order: true,
+//     // Repeat 5 times
+//     repetitions: 1,
+//     };
 
-// Push the  test precedure to timeline
-timeline.push(test_procedure);
+// // Push the  test precedure to timeline
+// timeline.push(test_procedure);
 
 var debrief_block = {
     type: jsPsychHtmlKeyboardResponse,
