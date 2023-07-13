@@ -1,1 +1,1 @@
-Here we will provide more information aout the project
+Here we will provide more information about the project
