@@ -19,6 +19,7 @@
      <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
     
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
 
 
 
@@ -44,7 +45,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/md_l.png'] };
+            images: ['img/md_l.png', 'img/num_test.png'] };
             timeline.push(preload);
 
 
@@ -121,7 +122,7 @@
 //     var loop_node = {
 //     timeline: [consent, if_consent_node],
 //     loop_function: function(data){
-//         // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+//         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
 //         if(data.values()[0].correct){
 //             return false;
 //         } else {
@@ -202,11 +203,14 @@
 //         timeline.push(instructions);
 
 
+
+
+
         // Set up another trial but substitute the value of the parameter in from the timeline variables.
 var switches = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
-    choices: ['True', 'False'],
+    choices: ['True', 'Indeterminate','False'],
     button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         image: 'switches',
@@ -232,27 +236,132 @@ question_type: 'test',
 // condition: 'false', 
 
 }
-
 ]
 
+
 // 
-var test_procedure = {
+var switches_procedure = {
     // Display fixation cross and then a test stimuli
     timeline: [switches],
     // link the variables from the stimuli array with the test trial boilerplate
     timeline_variables: switches_stimuli,
-    // Display stimuli at random (with repetition etc!!!) For randomize order use sample 
-    // sample: {
-    // type: 'alternate-groups',
-    // groups: [tests_numbers_1, tests_numbers_2, filler_numbers],  
-    // },
     // randomize_order: true,
-    // // Repeat 5 times
-    // repetitions: 1,
     };
 
 // Push the  test precedure to timeline
-timeline.push(test_procedure);
+
+var numbers = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        image: 'switches',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    };
+
+    var numbers_stimuli = [
+
+{ stimulus:` 
+ <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
+
+` , 
+question_type: 'test', 
+// context_type: 'neither', 
+// response_type: 'Yes', 
+// items: 'Big Ben, the London Eye', 
+// scenario: 'tourist office', 
+// condition: 'false', 
+
+},]
+
+
+// 
+var numbers_procedure = {
+    // Display fixation cross and then a test stimuli
+    timeline: [numbers],
+    // link the variables from the stimuli array with the test trial boilerplate
+    timeline_variables: numbers_stimuli,
+    // randomize_order: true,
+    };
+
+// Push the  test precedure to timeline
+
+
+
+
+var candy = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        image: 'switches',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    };
+
+    var candy_stimuli = [
+
+{ stimulus:` 
+ <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
+
+` , 
+question_type: 'test', 
+// context_type: 'neither', 
+// response_type: 'Yes', 
+// items: 'Big Ben, the London Eye', 
+// scenario: 'tourist office', 
+// condition: 'false', 
+
+},]
+
+
+// 
+var candy_procedure = {
+    // Display fixation cross and then a test stimuli
+    timeline: [candy],
+    // link the variables from the stimuli array with the test trial boilerplate
+    timeline_variables: candy_stimuli,
+    // randomize_order: true,
+    };
+
+
+    var pictures = {
+    type: jsPsychSurveyMultiSelect,
+    questions: [{
+    prompt: "What would it look like if both switches were in the green region?",
+    options: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",],
+    horizontal: true
+    }]};
+
+
+
+    timeline.push(candy_procedure);
+    timeline.push(numbers_procedure);
+    timeline.push(switches_procedure);
+    timeline.push(pictures);
+
+
+
+// Get a random number between 0 and 5
+var group = Math.floor(Math.random() * 5);
+
+
 
 var debrief_block = {
     type: jsPsychHtmlKeyboardResponse,
