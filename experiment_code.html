@@ -45,7 +45,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/md_l.png', 'img/num_test.png'] };
+            images: ['img/md_l.png', 'img/num_test.png', 'img/md_q.png'] };
             timeline.push(preload);
 
 
@@ -201,9 +201,129 @@
 
 //         // Push the instructions trial to the timeline
 //         timeline.push(instructions);
+// 
+
+//Instructions for switches
+var switches_inst = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus:` 
+                    <p>There are two switches, A and B, connected to a light. Part of the circuit is
+                        shaded grey. Each switch has three possible positions: up, in the middle, or
+                        down. </p> 
+                    <p> As the wiring indicates, the light is on just in case switch A is in the
+                        middle and switch B is either up or in the middle.</p> 
+                        
+                    <p>Currently, switch A is in the middle and switch B is down, so the light is off.</p>
+                    <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+
+                    <p> In each trial of this part of the study you will be presented with the same electrical circuit,but the position of the switches may differ. </p>
+                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+
+                    ` ,
+            choices: ['OK'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            };
+var switches_inst_2 = {
+type: jsPsychHtmlButtonResponse,
+stimulus:` 
+        <p>Sometimes the light will be covered with a question mark. It means that you need to figure out if the light is on or off.</p>
+        <img src='img/md_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+
+        <p> Consider the following sentence: </p>
+         <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
+        <p> In this case you would evaluate is as true, since the swiches complete the wiring and the current can flow.</p>
+
+        ` ,
+choices: ['OK'],
+button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+};
+
+
+// Create feedback trial, which will appear once a trainng item is answered!
+var feedback = {
+  type: jsPsychHtmlKeyboardResponse,
+  trial_duration: 
+  function(){
+    // Check if the answer was correct
+    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    if(last_trial_correct){
+      return 500; // If correct wait .5 sec
+    } else {
+      return 4000; // If incorrect wait 4 sec
+    }
+ },
+  stimulus: function(){
+    // Check if the answer was correct
+    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    if(last_trial_correct){
+      return "<p style='font-size:200%;'><b>Correct!</b></p>"; // If correct
+    } else {
+      return "<p style='font-size:200%;'> <b> Incorrect! </b></p> <p style='font-size:200%;'> Wait 4 seconds and try again!</p>"; // If incorrect.
+    }
+  },
+  choices: ['NO_KEYS'],
+}
+
+// Loop the training and feedbac until the correct answer is given.
+
+var switches_train = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        scenario: 'switches',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == jsPsych.timelineVariable('cor_ans')){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+
+var switches_train_stimuli = [
+
+{ stimulus:` 
+ <img src='img/mu_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
+
+` , 
+question_type: 'test', 
+cor_ans: 0, 
+// response_type: 'Yes', 
+// items: 'Big Ben, the London Eye', 
+// scenario: 'tourist office', 
+// condition: 'false', 
+
+},
+]
+
+var switches_train_loop = {
+    timeline: [switches_train, feedback],
+    timeline_variables: switches_train_stimuli,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
 
 
 
+
+
+// Create the trial that will appear if participants answer "indeterminate"
 var indeterminate_trial = {
         type: jsPsychSurveyMultiChoice,
         questions: [{
@@ -211,7 +331,7 @@ var indeterminate_trial = {
     options: ["I strongly feel that there is no right answer.", "I just don't know; I am not sure what the answer is."],
     horizontal: false
     }]};
-
+// Only show the indeterminate trial if the answer is "indeterminate"
 var indeterminate_node = {
     timeline: [indeterminate_trial],
     conditional_function: function(){
@@ -224,14 +344,14 @@ var indeterminate_node = {
     }
 };
 
-// Set up another trial but substitute the value of the parameter in from the timeline variables.
-var switches = {
+// Set up switches trial but substitute the value of the parameter in from the timeline variables.
+var switches_test = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
     button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
     data: {
-        image: 'switches',
+        scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
         // response_type: jsPsych.timelineVariable('response_type'),
         // items: jsPsych.timelineVariable('items')
@@ -245,7 +365,7 @@ var switches = {
         }
     }};
 
-    var switches_stimuli = [
+var switches_test_stimuli = [
 
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
@@ -265,15 +385,18 @@ question_type: 'test',
 
 
 // 
-var switches_procedure = {
+var switches_test_procedure = {
     // Display fixation cross and then a test stimuli
-    timeline: [switches, indeterminate_node],
+    timeline: [switches_test, indeterminate_node],
     // link the variables from the stimuli array with the test trial boilerplate
-    timeline_variables: switches_stimuli,
+    timeline_variables: switches_test_stimuli,
     // randomize_order: true,
     };
 
-// Push the  test precedure to timeline
+
+
+
+
 
 var numbers = {
     type: jsPsychHtmlButtonResponse,
@@ -389,7 +512,7 @@ var candy_procedure = {
     button_html: '<button class="jspsych-btn" style="font-size:120%;">%choice%</button>',
     };
 
-    timeline.push(pictures);
+    // timeline.push(pictures);
     
     
     var pictures = {
@@ -405,7 +528,7 @@ var candy_procedure = {
     horizontal: true
     }]};
 
-    timeline.push(pictures);
+    // timeline.push(pictures);
 
 
 
@@ -414,10 +537,13 @@ var candy_procedure = {
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
+timeline.push(switches_inst)
+timeline.push( switches_inst_2)
+timeline.push(switches_train_loop)
+timeline.push(switches_test_procedure);
+// timeline.push(candy_procedure);
+// timeline.push(numbers_procedure);
 
-timeline.push(candy_procedure);
-timeline.push(numbers_procedure);
-timeline.push(switches_procedure);
 
 
 
