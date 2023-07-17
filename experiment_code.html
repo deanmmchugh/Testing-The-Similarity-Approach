@@ -45,7 +45,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['https://github.com/deanmmchugh/Testing-The-Similarity-Approach/blob/main/img/md_l.png', 'https://github.com/deanmmchugh/Testing-The-Similarity-Approach/blob/main/img/num_test.png'] };
+            images: ['img/md_l.png', 'img/num_test.png'] };
             timeline.push(preload);
 
 
@@ -204,9 +204,27 @@
 
 
 
+var indeterminate_trial = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [{
+    prompt: 'You answered "indeterminate" to the last question. Please tell us what you had in mind:',
+    options: ["I strongly feel that there is no right answer.", "I just don't know; I am not sure what the answer is."],
+    horizontal: false
+    }]};
 
+var indeterminate_node = {
+    timeline: [indeterminate_trial],
+    conditional_function: function(){
+        var last_trial_indet = jsPsych.data.get().last(1).values()[0].indet
+        if(last_trial_indet){
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
 
-        // Set up another trial but substitute the value of the parameter in from the timeline variables.
+// Set up another trial but substitute the value of the parameter in from the timeline variables.
 var switches = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
@@ -218,7 +236,14 @@ var switches = {
         // response_type: jsPsych.timelineVariable('response_type'),
         // items: jsPsych.timelineVariable('items')
     },
-    };
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == 1){
+        data.indet = true;
+        } else {
+        data.indet = false; 
+        }
+    }};
 
     var switches_stimuli = [
 
@@ -242,7 +267,7 @@ question_type: 'test',
 // 
 var switches_procedure = {
     // Display fixation cross and then a test stimuli
-    timeline: [switches],
+    timeline: [switches, indeterminate_node],
     // link the variables from the stimuli array with the test trial boilerplate
     timeline_variables: switches_stimuli,
     // randomize_order: true,
@@ -261,6 +286,14 @@ var numbers = {
         // response_type: jsPsych.timelineVariable('response_type'),
         // items: jsPsych.timelineVariable('items')
     },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == 1){
+        data.indet = true;
+        } else {
+        data.indet = false; 
+        }
+    }
     };
 
     var numbers_stimuli = [
@@ -284,7 +317,7 @@ question_type: 'test',
 // 
 var numbers_procedure = {
     // Display fixation cross and then a test stimuli
-    timeline: [numbers],
+    timeline: [numbers, indeterminate_node],
     // link the variables from the stimuli array with the test trial boilerplate
     timeline_variables: numbers_stimuli,
     // randomize_order: true,
@@ -306,6 +339,14 @@ var candy = {
         // response_type: jsPsych.timelineVariable('response_type'),
         // items: jsPsych.timelineVariable('items')
     },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == 1){
+        data.indet = true;
+        } else {
+        data.indet = false; 
+        }
+    }
     };
 
     var candy_stimuli = [
@@ -329,7 +370,7 @@ question_type: 'test',
 // 
 var candy_procedure = {
     // Display fixation cross and then a test stimuli
-    timeline: [candy],
+    timeline: [candy, indeterminate_node],
     // link the variables from the stimuli array with the test trial boilerplate
     timeline_variables: candy_stimuli,
     // randomize_order: true,
@@ -337,9 +378,24 @@ var candy_procedure = {
 
 
     var pictures = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "What would it look like if both switches were in the green region? Please click on all matching pictures.",
+    choices: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;">%choice%</button>',
+    };
+
+    timeline.push(pictures);
+    
+    
+    var pictures = {
     type: jsPsychSurveyMultiSelect,
     questions: [{
-    prompt: "What would it look like if both switches were in the green region?",
+    prompt: "What would it look like if both switches were in the green region? Please click on all matching pictures.",
     options: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
     "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
     "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
@@ -349,17 +405,19 @@ var candy_procedure = {
     horizontal: true
     }]};
 
-
-
-    timeline.push(candy_procedure);
-    timeline.push(numbers_procedure);
-    timeline.push(switches_procedure);
     timeline.push(pictures);
+
+
+
 
 
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
+
+timeline.push(candy_procedure);
+timeline.push(numbers_procedure);
+timeline.push(switches_procedure);
 
 
 
