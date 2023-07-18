@@ -45,7 +45,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/md_l.png', 'img/num_test.png', 'img/md_q.png'] };
+            images: ['img/md_l.png', 'img/num_test.png', 'img/md_q.png', 'img/dm_l.png','img/mm_l.png', 'img/ud_l.png'] };
             timeline.push(preload);
 
 
@@ -291,24 +291,58 @@ var switches_train = {
 var switches_train_stimuli = [
 
 { stimulus:` 
- <img src='img/mu_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <img src='img/mu_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  <p style='font-size:100%;'>Is the following sentence true?</p>
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
 
 ` , 
-question_type: 'test', 
-cor_ans: 0, 
-// response_type: 'Yes', 
-// items: 'Big Ben, the London Eye', 
-// scenario: 'tourist office', 
-// condition: 'false', 
+question_type: 'training', 
+cor_ans: 2, 
+switches_pos: 'mu',
+sentence_light: 'off',
+},
 
+{ stimulus:` 
+ <img src='img/dm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 2, 
+switches_pos: 'dm',
+sentence_light: 'on',
+},
+
+{ stimulus:` 
+ <img src='img/mm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+switches_pos: 'mm',
+sentence_light: 'on',
+},
+
+{ stimulus:` 
+ <img src='img/ud_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+switches_pos: 'ud',
+sentence_light: 'off',
 },
 ]
 
 var switches_train_loop = {
     timeline: [switches_train, feedback],
     timeline_variables: switches_train_stimuli,
+    randomize_order: true,
     loop_function: function(data){
         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
         if(data.values()[0].correct){
@@ -390,7 +424,7 @@ var switches_test_procedure = {
     timeline: [switches_test, indeterminate_node],
     // link the variables from the stimuli array with the test trial boilerplate
     timeline_variables: switches_test_stimuli,
-    // randomize_order: true,
+    randomize_order: true,
     };
 
 
