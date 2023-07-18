@@ -44,7 +44,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/md_l.png', 'img/num_test.png', 'img/md_q.png', 'img/dm_l.png','img/mm_l.png', 'img/ud_l.png'] };
+            images: ['img/md_l.png', 'img/md_q.png', 'img/dm_l.png','img/mm_l.png', 'img/ud_l.png'] };
             timeline.push(preload);
 
 
@@ -187,6 +187,36 @@
 
 // timeline.push(loop_node);
 
+// Create feedback trial, which will appear once a training item is answered
+var feedback = {
+  type: jsPsychHtmlKeyboardResponse,
+  trial_duration: 
+  function(){
+    // Check if the answer was correct
+    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    if(last_trial_correct){
+      return 500; // If correct wait .5 sec
+    } else {
+      return 4000; // If incorrect wait 4 sec
+    }
+ },
+  stimulus: function(){
+    // Check if the answer was correct
+    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+    if(last_trial_correct){
+      return "<p style='font-size:200%;'><b>Correct!</b></p>"; // If correct
+    } else {
+      return "<p style='font-size:200%;'> <b> Incorrect! </b></p> <p style='font-size:200%;'> Wait 4 seconds and try again!</p>"; // If incorrect.
+    }
+  },
+  choices: ['NO_KEYS'],
+}
+
+
+/////////////////////////////////////////////////////
+// SWITCHES
+/////////////////////////////////////////////////////
+
 //Instructions for switches
 var switches_inst = {
             type: jsPsychHtmlButtonResponse,
@@ -225,32 +255,7 @@ post_trial_gap: 400
 };
 
 
-// Create feedback trial, which will appear once a trainng item is answered!
-var feedback = {
-  type: jsPsychHtmlKeyboardResponse,
-  trial_duration: 
-  function(){
-    // Check if the answer was correct
-    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-    if(last_trial_correct){
-      return 500; // If correct wait .5 sec
-    } else {
-      return 4000; // If incorrect wait 4 sec
-    }
- },
-  stimulus: function(){
-    // Check if the answer was correct
-    var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-    if(last_trial_correct){
-      return "<p style='font-size:200%;'><b>Correct!</b></p>"; // If correct
-    } else {
-      return "<p style='font-size:200%;'> <b> Incorrect! </b></p> <p style='font-size:200%;'> Wait 4 seconds and try again!</p>"; // If incorrect.
-    }
-  },
-  choices: ['NO_KEYS'],
-}
-
-// Loop the training and feedbac until the correct answer is given.
+// Loop the training and feedback until the correct answer is given.
 
 var switches_train = {
     type: jsPsychHtmlButtonResponse,
@@ -544,110 +549,50 @@ var switches_test_procedure = {
     };
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+// CANDY
+//////////////////////////////////////////////////////////////////////////////////////////////
 
+//Instructions for candy
+var candy_inst = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus:` <div >
+                    <p style="margin-top:5%;">A school teacher has a bag containing many kinds of candy.</p>  
+                        
+                    <p> Some candies in the bag are fruit-flavoured, including strawberry-flavoured candy, banana-flavoured candy, and cherry-flavoured candy. 
+                        The bag also contains candy that is not fruit-flavoured, such as chocolate, toffee, and mints. </p> 
+                    <p> Alice and Bob are two kids in the teacher's class. Alice likes strawberry
+                                    flavoured candy and does not like any other kind of candy. Bob likes
+                                    all fruit flavoured candy, but does not like any other kind of candy. </p> 
+                        
+                    <p>At the end of the school day, the teacher gave a piece of candy to each child by picking one at random from the bag.</p>
+                    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+                    <img src='img/c_b_b_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
 
+                    <p> In each trial of this part of the study you will be presented with a picture indicating which child got which candy. </p>
+                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+                    </div>
+                    ` ,
+            choices: ['OK'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            post_trial_gap: 400
+            };
+var candy_inst_2 = {
+type: jsPsychHtmlButtonResponse,
+stimulus:` 
+        <p style="margin-top:5%;"> Sometimes the children's preferences will be covered with question marks. It means that you need to figure out whether the child was happy their candy. </p>
+        <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+        <img src='img/c_b_b_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
 
+        <p> Consider the following sentence: </p>
+         <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
+        <p> In this case you would evaluate this sentence as true, since Alice got strawberry-flavoured candy and Bob a fruit flavoured candy.</p>
 
-var numbers = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
-    choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
-    data: {
-        image: 'switches',
-        question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
-        // items: jsPsych.timelineVariable('items')
-    },
-    on_finish: function(data){
-        // Score the response as correct or incorrect.
-        if(data.response == 1){
-        data.indet = true;
-        } else {
-        data.indet = false; 
-        }
-    }
-    };
-
-    var numbers_stimuli = [
-
-{ stimulus:` 
- <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
- 
- <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
-
-` , 
-question_type: 'test', 
-// context_type: 'neither', 
-// response_type: 'Yes', 
-// items: 'Big Ben, the London Eye', 
-// scenario: 'tourist office', 
-// condition: 'false', 
-
-},]
-
-
-// 
-var numbers_procedure = {
-    // Display fixation cross and then a test stimuli
-    timeline: [numbers, indeterminate_node],
-    // link the variables from the stimuli array with the test trial boilerplate
-    timeline_variables: numbers_stimuli,
-    // randomize_order: true,
-    };
-
-// Push the  test precedure to timeline
-
-
-
-
-var candy = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
-    choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
-    data: {
-        image: 'switches',
-        question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
-        // items: jsPsych.timelineVariable('items')
-    },
-    on_finish: function(data){
-        // Score the response as correct or incorrect.
-        if(data.response == 1){
-        data.indet = true;
-        } else {
-        data.indet = false; 
-        }
-    }
-    };
-
-    var candy_stimuli = [
-
-{ stimulus:` 
- <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
- 
- <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
-
-` , 
-question_type: 'test', 
-// context_type: 'neither', 
-// response_type: 'Yes', 
-// items: 'Big Ben, the London Eye', 
-// scenario: 'tourist office', 
-// condition: 'false', 
-
-},]
-
-
-// 
-var candy_procedure = {
-    // Display fixation cross and then a test stimuli
-    timeline: [candy, indeterminate_node],
-    // link the variables from the stimuli array with the test trial boilerplate
-    timeline_variables: candy_stimuli,
-    // randomize_order: true,
-    };
+        ` ,
+choices: ['OK'],
+button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+post_trial_gap: 400
+};
 
 // Function to highlight the pictures in the picture-choice scenario
     function mark(picture) {
@@ -679,7 +624,7 @@ var candy_procedure = {
   return array;
 }
    
-    var pictures_2 = {
+    var switches_pictures = {
     type: jsPsychSurveyMultiSelect,
     preamble: `
         <p> Currently switch A is in the middle and switch B is down:</p>
@@ -690,7 +635,6 @@ var candy_procedure = {
     button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
     questions: [{    
     prompt: "",
-    // TO DO: Randomise!
     options: shuffle([ 
     "<img src='img/cut_uu.png' class='picture-select' id='picture1' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture1`)'></img>",
     "<img src='img/cut_um.png' class='picture-select' id='picture2' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture2`)'></img>",
@@ -709,10 +653,14 @@ var group = Math.floor(Math.random() * 5);
 // timeline.push(switches_train_loop)
 // timeline.push(switches_test_procedure);
 
+
+timeline.push(candy_inst, candy_inst_2)
+// timeline.push(candy_train_loop)
+// timeline.push(candy_test_procedure);
+
 //TO DO:add information about the ordering to every trial.
 
-// timeline.push(pictures_1);
-timeline.push(pictures_2);
+// timeline.push(switches_pictures);
 
 
 var debrief_block = {
