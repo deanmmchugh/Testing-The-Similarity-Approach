@@ -22,7 +22,7 @@
 
     <!-- Style from JsPsych -->
     <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
-    <link href="local.css" rel="stylesheet"/>
+    <!-- <link href="local.css" rel="stylesheet"/> -->
 </head>
 <body>
     <!-- JsPsych script -->
@@ -30,7 +30,7 @@
        // Note that participant's response 0 corresponds to Yes and 1 corresponds to No. 
         // Bootstrap
         document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">')
-        // document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/causal_css.css" type="text/css">')
+        document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/causal_css.css" type="text/css">')
         // Initialise and make data display at the end.
         var jsPsych = initJsPsych({
             on_finish: function(){
@@ -664,8 +664,18 @@ var candy_procedure = {
 
     function mark(picture) {
         var image = document.getElementById(picture);
-        image.style.border = "10px solid #555";
+        // image.style.border = "10px solid #555";
+
+        if(image.style.borderStyle === "solid") {
+            image.style.border = "none";
+        } else {
+            image.style.border = "10px solid #555";
+        }
     };
+    // function unmark(picture) {
+    //     var image = document.getElementById(picture);
+    //     image.style.border = "10px solid #222";
+    // };
    
     var pictures_2 = {
     type: jsPsychSurveyMultiSelect,
@@ -680,12 +690,12 @@ var candy_procedure = {
     prompt: "",
     // TO DO: Randomise!
     options: [ 
-    "<img src='img/cut_uu.png' class='picture-select'id='picture1' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' onclick='mark(`picture1`)'></img>",
-    "<img src='img/cut_um.png' class='picture-select'id='picture2' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture2`)'></img>",
-    "<img src='img/cut_ud.png' class='picture-select'id='picture3' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture3`)'></img>",
-    "<img src='img/cut_mu.png' class='picture-select'id='picture4' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture4`)'></img>",
-    "<img src='img/cut_mm.png' class='picture-select'id='picture5' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture5`)'></img>",
-    "<img src='img/cut_md.png' class='picture-select'id='picture6' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture6`)'></img>",],
+    "<img src='img/cut_uu.png' class='picture-select'id='picture1' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture1`)' onclick='mark(`picture1`)'></img>",
+    "<img src='img/cut_um.png' class='picture-select'id='picture2' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture2`)' onclick='mark(`picture2`)'></img>",
+    "<img src='img/cut_ud.png' class='picture-select'id='picture3' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture3`)' onclick='mark(`picture3`)'></img>",
+    "<img src='img/cut_mu.png' class='picture-select'id='picture4' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture4`)' onclick='mark(`picture4`)'></img>",
+    "<img src='img/cut_mm.png' class='picture-select'id='picture5' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture5`)' onclick='mark(`picture5`)'></img>",
+    "<img src='img/cut_md.png' class='picture-select'id='picture6' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' ondblclick='unmark(`picture6`)' onclick='mark(`picture6`)'></img>",],
     horizontal: true
     }]};
 
