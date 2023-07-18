@@ -221,7 +221,8 @@ var indeterminate_trial = {
         questions: [{
     prompt: 'You answered "indeterminate" to the last question. Please tell us what you had in mind:',
     options: ["I strongly feel that there is no right answer.", "I just don't know; I am not sure what the answer is."],
-    horizontal: false
+    horizontal: false,
+    required: true,
     }]};
 // Only show the indeterminate trial if the answer is "indeterminate"
 var indeterminate_node = {
@@ -837,13 +838,13 @@ sentence: 'Bob got a fruit-flavoured candy.',
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Alice got a non-fruit-flavoured candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob got a strawberry-flavoured candy. </b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F4',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Alice got a non-fruit-flavoured candy.',
+sentence: 'Bob got a strawberry-flavoured candy',
 
 },
 { stimulus:` 
@@ -883,6 +884,337 @@ var candy_test_procedure = {
     timeline_variables: candy_test_stimuli,
     randomize_order: true,
     };
+
+///////////////////////////////////////////////////
+//NUMBERS
+///////////////////////////////////////////////////
+
+//Instructions for candy
+var numbers_inst = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus:` <div >
+                    <p style="margin-top:5%;">Alex and Kim are playing a computer game. </p>  
+                        
+                    <p> In the game a computer gives each player two numbers: a blue number and a red number. Each number is between
+                        1 and 4 and is chosen by the computer at random.</p> 
+                    <p>   A player wins just in case
+                                their red number is higher than their opponentʼs red number and their blue
+                                number is higher than their opponentʼs blue number.  </p> 
+                        
+                    <p>Otherwise the result is a draw.</p>
+                    <img src='img/n_t1_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+
+                    <p> In each trial of this part of the study you will be presented with a picture showing a score of the game. </p>
+                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+                    </div>
+                    ` ,
+            choices: ['OK'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            post_trial_gap: 400
+            };
+var numbers_inst_2 = {
+type: jsPsychHtmlButtonResponse,
+stimulus:` 
+        <p style="margin-top:5%;"> Sometimes the result of the game will be covered with question marks. It means that you need to figure out who has the winning hand. </p>
+        <img src='img/n_t1_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+
+        <p> Consider the following sentence: </p>
+         <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand </b></p>
+        <p> In this case you would evaluate this sentence as true, since both Kim's cards are higher than Alex's cards.</p>
+
+        ` ,
+choices: ['OK'],
+button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+post_trial_gap: 400
+};
+
+// Loop the training and feedback until the correct answer is given.
+
+var numbers_train = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        scenario: 'numbers',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == jsPsych.timelineVariable('cor_ans')){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+
+var numbers_train_stimuli = [
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>                 
+    <p>Otherwise the result is a draw.</p>
+                        
+    <img src='img/n_t1_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a wining hand.  </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+numbers_pos: '1223',
+sentence_light: 'win',
+},
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t2_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a wining hand.  </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 2, 
+numbers_pos: '2233',
+sentence_light: 'not win',
+},
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t3_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a wining hand.  </b></p>
+` , 
+question_type: 'training', 
+cor_ans: 2, 
+numbers_pos: '1242',
+sentence_light: 'win',
+},
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t4_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a wining hand.  </b></p>
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+numbers_pos: '4231',
+sentence_light: 'not win',
+},
+]
+
+var numbers_train_loop = {
+    timeline: [numbers_train, feedback],
+    timeline_variables: numbers_train_stimuli,
+    randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+
+// Set up numbers trial but substitute the value of the parameter in from the timeline variables.
+var numbers_test = {
+    type: jsPsychHtmlButtonResponse,
+    post_trial_gap: 400,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        scenario: 'numbers',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == 1){
+        data.indet = true;
+        } else {
+        data.indet = false; 
+        }
+    }, 
+    };
+
+var numbers_test_stimuli = [
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were 2, Kim would have a winning hand.  </b></p>
+` , 
+question_type: 'test', 
+condition: 'False',
+predicted_ans: 2,
+numbers_pos: '1314',
+sentence: 'If both of Kimʼs numbers were 2, Kim would have a winning hand.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were 4, Kim would have a winning hand.  </b></p>
+` , 
+question_type: 'test', 
+condition: 'True',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: 'If both of Kimʼs numbers were 4, Kim would have a winning hand.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If Kimʼs blue number were even, Kim would have a winning hand. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T1',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: 'If Kimʼs blue number were even, Kim would have a winning hand.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If Kimʼs blue number was even, both of Kimʼs numbers would be even. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T2',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: 'If Kimʼs blue number was even, both of Kimʼs numbers would be even.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were even, Kimʼs blue number would be even. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T3',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: 'If both of Kimʼs numbers were even, Kimʼs blue number would be even.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were even, Kim would have a winning hand. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T4',
+predicted_ans: 3,
+numbers_pos: '1314',
+sentence: 'If both of Kimʼs numbers were even, Kim would have a winning hand.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kimʼs red number is higher than Alexʼs red number. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F1',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: 'Kimʼs red number is higher than Alexʼs red number.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Alex currently has a winning hand. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F2',
+predicted_ans: 2,
+numbers_pos: '1314',
+sentence: 'Alex currently has a winning hand.',
+
+},
+
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs red number is even.  </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F3',
+predicted_ans: 2,
+numbers_pos: '1314',
+sentence: 'Alexʼs red number is even.',
+
+},
+{ stimulus:` 
+     <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs blue number is higher than Kimʼs blue number. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F4',
+predicted_ans: 2,
+numbers_pos: '1314',
+sentence: 'Alexʼs blue number is higher than Kimʼs blue number.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> 2 is an even number. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F5',
+predicted_ans: 0,
+numbers_pos: '1314',
+sentence: '2 is an even number.',
+
+},
+{ stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs red number is higher than Kimʼs red number. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F6',
+predicted_ans: 2,
+numbers_pos: '1314',
+sentence: 'Alexʼs red number is higher than Kimʼs red number.',
+
+},
+];
+
+
+// 
+var numbers_test_procedure = {
+    // Display fixation cross and then a test stimuli
+    timeline: [numbers_test, indeterminate_node],
+    // link the variables from the stimuli array with the test trial boilerplate
+    timeline_variables: numbers_test_stimuli,
+    randomize_order: true,
+    };
+
+
 
 
 ///////////////////////////////////////////////////
@@ -958,7 +1290,7 @@ var candy_test_procedure = {
     <p>  Alice got strawberry flavoured candy and Bob got a mint. </p> 
     <img src='img/c_a_s_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img>
-        <p> What would it look like if both of the childrenʼs candy had been fruit-flavoured,? Please click on all matching pictures. </p>
+        <p> What would it look like if both of the childrenʼs candy had been fruit-flavoured? Please click on all matching pictures. </p>
         <p> When you are done click "Continue" at the bottom of the page.</p>
        `,
     button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
@@ -975,23 +1307,57 @@ var candy_test_procedure = {
     horizontal: true
     }]};
 
+    var numbers_pictures = {
+    type: jsPsychSurveyMultiSelect,
+    preamble: `
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    
+        <p>  Currently the game looks as follows: </p> 
+        <img src='img/n_test_im.png' style='width:90%;max-width:400px;height:auto;margin-bottom:4%;'></img>
+        <p> What would it look like if both of Kimʼs numbers were even? Please click on all matching pictures. </p>
+        <p> When you are done click "Continue" at the bottom of the page.</p>
+       `,
+    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
+    questions: [{    
+    prompt: "",
+    options: shuffle([ 
+    "<img src='img/n_1212_cut.png' class='picture-select' id='picture21' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture21`)'></img>",
+    "<img src='img/n_1223_cut.png' class='picture-select' id='picture22' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture22`)'></img>",
+    "<img src='img/n_1242_cut.png' class='picture-select' id='picture23' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture23`)'></img>",
+    "<img src='img/n_1314_cut.png' class='picture-select' id='picture24' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture24`)'></img>",
+    "<img src='img/n_2233_cut.png' class='picture-select' id='picture25' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture25`)'></img>",
+    "<img src='img/n_4231_cut.png' class='picture-select' id='picture26' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture26`)'></img>",
+        ]),
+    horizontal: true
+    }]};
+
+
 
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
+
+// // Switches group
 timeline.push(switches_inst, switches_inst_2)
 timeline.push(switches_train_loop)
 timeline.push(switches_test_procedure);
 
-
+// // Candy group
 timeline.push(candy_inst, candy_inst_2)
 timeline.push(candy_train_loop)
 timeline.push(candy_test_procedure);
+
+// Numbers group
+timeline.push(numbers_inst, numbers_inst_2)
+timeline.push(numbers_train_loop)
+timeline.push(numbers_test_procedure);
 
 //TO DO:add information about the ordering to every trial.
 
 timeline.push(switches_pictures);
 timeline.push(candy_pictures);
+timeline.push(numbers_pictures);
 
 
 var debrief_block = {
