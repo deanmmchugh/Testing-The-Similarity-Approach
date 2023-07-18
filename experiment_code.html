@@ -44,7 +44,7 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/md_l.png', 'img/md_q.png', 'img/dm_l.png','img/mm_l.png', 'img/ud_l.png'] };
+            images: ['img/md_l.png', 'img/md_q.png', 'img/dm_l.png','img/mm_l.png', 'img/ud_l.png', "img/c_a_s_im.png", "img/c_b_m_im.png"] };
             timeline.push(preload);
 
 
@@ -213,6 +213,30 @@ var feedback = {
 }
 
 
+
+
+// Create the trial that will appear if participants answer "indeterminate"
+var indeterminate_trial = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [{
+    prompt: 'You answered "indeterminate" to the last question. Please tell us what you had in mind:',
+    options: ["I strongly feel that there is no right answer.", "I just don't know; I am not sure what the answer is."],
+    horizontal: false
+    }]};
+// Only show the indeterminate trial if the answer is "indeterminate"
+var indeterminate_node = {
+    timeline: [indeterminate_trial],
+    conditional_function: function(){
+        var last_trial_indet = jsPsych.data.get().last(1).values()[0].indet
+        if(last_trial_indet){
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+
+
 /////////////////////////////////////////////////////
 // SWITCHES
 /////////////////////////////////////////////////////
@@ -346,29 +370,6 @@ var switches_train_loop = {
 
 
 
-
-
-// Create the trial that will appear if participants answer "indeterminate"
-var indeterminate_trial = {
-        type: jsPsychSurveyMultiChoice,
-        questions: [{
-    prompt: 'You answered "indeterminate" to the last question. Please tell us what you had in mind:',
-    options: ["I strongly feel that there is no right answer.", "I just don't know; I am not sure what the answer is."],
-    horizontal: false
-    }]};
-// Only show the indeterminate trial if the answer is "indeterminate"
-var indeterminate_node = {
-    timeline: [indeterminate_trial],
-    conditional_function: function(){
-        var last_trial_indet = jsPsych.data.get().last(1).values()[0].indet
-        if(last_trial_indet){
-            return true;
-        } else {
-            return false;
-        }
-    }
-};
-
 // Set up switches trial but substitute the value of the parameter in from the timeline variables.
 var switches_test = {
     type: jsPsychHtmlButtonResponse,
@@ -402,7 +403,7 @@ var switches_test_stimuli = [
 ` , 
 question_type: 'test', 
 condition: 'False',
-logical_ans: 2,
+predicted_ans: 2,
 switches_pos: 'md',
 sentence: 'If both switches were outside the shaded area, the light would be on.',
 
@@ -415,7 +416,7 @@ sentence: 'If both switches were outside the shaded area, the light would be on.
 ` , 
 question_type: 'test', 
 condition: 'True',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'If both switches were in the middle, the light would be on.',
 
@@ -428,7 +429,7 @@ sentence: 'If both switches were in the middle, the light would be on.',
 ` , 
 question_type: 'test', 
 condition: 'T1',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'If switch B were in the shaded area, the light would be on.',
 
@@ -441,7 +442,7 @@ sentence: 'If switch B were in the shaded area, the light would be on.',
 ` , 
 question_type: 'test', 
 condition: 'T2',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'If switch B were in the shaded area, both switches would be in the shaded area.',
 
@@ -454,7 +455,7 @@ sentence: 'If switch B were in the shaded area, both switches would be in the sh
 ` , 
 question_type: 'test', 
 condition: 'T3',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'If both switches were in the shaded area, switch B would be in the shaded area.',
 
@@ -467,7 +468,7 @@ sentence: 'If both switches were in the shaded area, switch B would be in the sh
 ` , 
 question_type: 'test', 
 condition: 'T4',
-logical_ans: 3,
+predicted_ans: 3,
 switches_pos: 'md',
 sentence: 'If both switches were in the shaded area, the light would be on.',
 
@@ -480,7 +481,7 @@ sentence: 'If both switches were in the shaded area, the light would be on.',
 ` , 
 question_type: 'filler', 
 condition: 'F1',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'The light is on just in case switch A is in the middle and switch B is up or in the middle.',
 
@@ -492,7 +493,7 @@ sentence: 'The light is on just in case switch A is in the middle and switch B i
 ` , 
 question_type: 'filler', 
 condition: 'F2',
-logical_ans: 2,
+predicted_ans: 2,
 switches_pos: 'md',
 sentence: 'The light is currently on.',
 
@@ -505,7 +506,7 @@ sentence: 'The light is currently on.',
 ` , 
 question_type: 'filler', 
 condition: 'F3',
-logical_ans: 2,
+predicted_ans: 2,
 switches_pos: 'md',
 sentence: 'Switch B is currently in the shaded area.',
 
@@ -518,7 +519,7 @@ sentence: 'Switch B is currently in the shaded area.',
 ` , 
 question_type: 'filler', 
 condition: 'F4',
-logical_ans: 2,
+predicted_ans: 2,
 switches_pos: 'md',
 sentence: 'Switch B is currently in the middle.',
 
@@ -531,7 +532,7 @@ sentence: 'Switch B is currently in the middle.',
 ` , 
 question_type: 'filler', 
 condition: 'F5',
-logical_ans: 0,
+predicted_ans: 0,
 switches_pos: 'md',
 sentence: 'A switch is in the shaded area just in case it is up or in the middle.',
 
@@ -560,9 +561,8 @@ var candy_inst = {
                     <p style="margin-top:5%;">A school teacher has a bag containing many kinds of candy.</p>  
                         
                     <p> Some candies in the bag are fruit-flavoured, including strawberry-flavoured candy, banana-flavoured candy, and cherry-flavoured candy. 
-                        The bag also contains candy that is not fruit-flavoured, such as chocolate, toffee, and mints. </p> 
-                    <p> Alice and Bob are two kids in the teacher's class. Alice likes strawberry
-                                    flavoured candy and does not like any other kind of candy. Bob likes
+                        The bag also contains candy that is not fruit-flavoured, such as chocolate, toffee, and mints. Alice and Bob are two kids in the teacher's class.</p> 
+                    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes
                                     all fruit flavoured candy, but does not like any other kind of candy. </p> 
                         
                     <p>At the end of the school day, the teacher gave a piece of candy to each child by picking one at random from the bag.</p>
@@ -594,6 +594,301 @@ button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40
 post_trial_gap: 400
 };
 
+
+// Loop the training and feedback until the correct answer is given.
+
+var candy_train = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        scenario: 'candy',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == jsPsych.timelineVariable('cor_ans')){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+
+var candy_train_stimuli = [
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 2, 
+candy_pos: 'sb',
+sentence_light: 'unhappy',
+},
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>                 
+    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
+
+` , 
+question_type: 'training', 
+cor_ans: 2, 
+candy_pos: 'bs',
+sentence_light: 'happy',
+},
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+candy_pos: 'ss',
+sentence_light: 'happy',
+},
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_ch_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
+` , 
+question_type: 'training', 
+cor_ans: 0, 
+candy_pos: 'bc',
+sentence_light: 'unhappy',
+},
+]
+
+var candy_train_loop = {
+    timeline: [candy_train, feedback],
+    timeline_variables: candy_train_stimuli,
+    randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+
+// Set up candy trial but substitute the value of the parameter in from the timeline variables.
+var candy_test = {
+    type: jsPsychHtmlButtonResponse,
+    post_trial_gap: 400,
+    stimulus:jsPsych.timelineVariable('stimulus'),
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    data: {
+        scenario: 'candy',
+        question_type: jsPsych.timelineVariable('question_type'),
+        // response_type: jsPsych.timelineVariable('response_type'),
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == 1){
+        data.indet = true;
+        } else {
+        data.indet = false; 
+        }
+    }, 
+    };
+
+var candy_test_stimuli = [
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been chocolate flavoured, they would both have been happy with their candy. </b></p>
+` , 
+question_type: 'test', 
+condition: 'False',
+predicted_ans: 2,
+candy_pos: 'sm',
+sentence: 'If both of the childrenʼs candy had been chocolate flavoured, they would both have been happy with their candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been strawberry flavoured, they would both have been happy with their candy. </b></p>
+` , 
+question_type: 'test', 
+condition: 'True',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'If both of the childrenʼs candy had been strawberry flavoured, they would both have been happy with their candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bobʼs candy had been fruit-flavoured, both of the children would have been happy with their candy. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T1',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'If Bobʼs candy had been fruit-flavoured, both of the children would have been happy with their candy',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bobʼs candy had been fruit-flavoured, both of the childrenʼs candy would have been fruit-flavoured. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T2',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'If Bobʼs candy had been fruit-flavoured, both of the childrenʼs candy would have been fruit-flavoured.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been fruit-flavoured, Bobʼs candy would have been fruit-flavoured. </b></p>
+` , 
+question_type: 'test', 
+condition: 'T3',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'If both of the childrenʼs candy had been fruit-flavoured, Bobʼs candy would have been fruit-flavoured.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been fruit-flavoured, both of the children
+would have been happy with their candy.</b></p>
+` , 
+question_type: 'test', 
+condition: 'T4',
+predicted_ans: 3,
+candy_pos: 'sm',
+sentence: 'If both of the childrenʼs candy had been fruit-flavoured, both of the children would have been happy with their candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both Alice and Bob are happy just in case Alice gets a strawberry-flavoured candy and Bob gets a fruit-flavoured candy. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F1',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'Both Alice and Bob are happy just in case Alice gets a strawberry-flavoured candy and Bob gets a fruit-flavoured candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both of the children were happy with the candy they received. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F2',
+predicted_ans: 2,
+candy_pos: 'sm',
+sentence: 'Both of the children were happy with the candy they received.',
+
+},
+
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob got a fruit-flavoured candy.</b></p>
+` , 
+question_type: 'filler', 
+condition: 'F3',
+predicted_ans: 2,
+candy_pos: 'sm',
+sentence: 'Bob got a fruit-flavoured candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Alice got a non-fruit-flavoured candy. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F4',
+predicted_ans: 2,
+candy_pos: 'sm',
+sentence: 'Alice got a non-fruit-flavoured candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>The teacherʼs bag contains banana-flavoured candy. </b></p>
+` , 
+question_type: 'filler', 
+condition: 'F5',
+predicted_ans: 0,
+candy_pos: 'sm',
+sentence: 'The teacherʼs bag contains banana-flavoured candy.',
+
+},
+{ stimulus:` 
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both of the childrenʼs candy are fruit-flavoured.</b></p>
+` , 
+question_type: 'filler', 
+condition: 'F6',
+predicted_ans: 2,
+candy_pos: 'sm',
+sentence: 'Both of the childrenʼs candy are fruit-flavoured.',
+
+},
+];
+
+
+// 
+var candy_test_procedure = {
+    // Display fixation cross and then a test stimuli
+    timeline: [candy_test, indeterminate_node],
+    // link the variables from the stimuli array with the test trial boilerplate
+    timeline_variables: candy_test_stimuli,
+    randomize_order: true,
+    };
+
+
+///////////////////////////////////////////////////
+//PICTURE SELECTION
+///////////////////////////////////////////////////
+
 // Function to highlight the pictures in the picture-choice scenario
     function mark(picture) {
         var image = document.getElementById(picture);
@@ -601,6 +896,16 @@ post_trial_gap: 400
         if(image.style.outlineStyle === "solid") {
             image.style.outline = "none";
             image.style.outlineRadius = "0px";
+        } else {
+            image.style.outline = "10px solid green";
+            image.style.borderRadius = "25px";
+        }
+    };
+    function mark_candy(picture) {
+        var image = document.getElementById(picture);
+
+        if(image.style.outlineStyle === "solid") {
+            image.style.outline = "1px dashed";
         } else {
             image.style.outline = "10px solid green";
             image.style.borderRadius = "25px";
@@ -628,7 +933,7 @@ post_trial_gap: 400
     type: jsPsychSurveyMultiSelect,
     preamble: `
         <p> Currently switch A is in the middle and switch B is down:</p>
-        <img src='img/cut_md.png' style='width:90%;max-width:220px;height:auto;' onclick='mark()'></img> 
+         <img src='img/cut_md.png' style='width:90%;max-width:220px;height:auto;'></img> 
         <p> What would it look like if both switches were in the shaded area? Please click on all matching pictures. </p>
         <p> When you are done click "Continue" at the bottom of the page.</p>
        `,
@@ -646,6 +951,31 @@ post_trial_gap: 400
     horizontal: true
     }]};
 
+    var candy_pictures = {
+    type: jsPsychSurveyMultiSelect,
+    preamble: `
+    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+    <p>  Alice got strawberry flavoured candy and Bob got a mint. </p> 
+    <img src='img/c_a_s_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_m_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img>
+        <p> What would it look like if both of the childrenʼs candy had been fruit-flavoured,? Please click on all matching pictures. </p>
+        <p> When you are done click "Continue" at the bottom of the page.</p>
+       `,
+    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
+    questions: [{    
+    prompt: "",
+    options: shuffle([ 
+    "<img src='img/c_bch_cut.png' class='picture-select' id='picture11' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture11`)'></img>",
+    "<img src='img/c_bs_cut.png' class='picture-select' id='picture12' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture12`)'></img>",
+    "<img src='img/c_sb_cut.png' class='picture-select' id='picture13' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture13`)'></img>",
+    "<img src='img/c_ss_cut.png' class='picture-select' id='picture14' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture14`)'></img>",
+    "<img src='img/c_sm_cut.png' class='picture-select' id='picture15' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture15`)'></img>",
+    "<img src='img/c_chs_cut.png' class='picture-select' id='picture16' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture16`)'></img>",
+        ]),
+    horizontal: true
+    }]};
+
+
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
@@ -654,13 +984,14 @@ var group = Math.floor(Math.random() * 5);
 // timeline.push(switches_test_procedure);
 
 
-timeline.push(candy_inst, candy_inst_2)
+// timeline.push(candy_inst, candy_inst_2)
 // timeline.push(candy_train_loop)
 // timeline.push(candy_test_procedure);
 
 //TO DO:add information about the ordering to every trial.
 
 // timeline.push(switches_pictures);
+timeline.push(candy_pictures);
 
 
 var debrief_block = {
