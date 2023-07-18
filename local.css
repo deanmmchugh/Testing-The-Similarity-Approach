@@ -1,0 +1,31 @@
+@media only screen and (min-width: 600px)  {
+    .consent{
+        font-size: 90%;
+        text-align: left;
+        margin: 5% 10%;
+    }
+}
+
+.picture-select:hover{
+    border: 10px solid #555;
+
+}
+
+#jspsych-survey-multi-select-response-0-0{
+    display: none;
+}
+#jspsych-survey-multi-select-response-0-1{
+    display: none;
+}
+#jspsych-survey-multi-select-response-0-2{
+    display: none;
+}
+#jspsych-survey-multi-select-response-0-3{
+    display: none;
+}
+#jspsych-survey-multi-select-response-0-4{
+    display: none;
+}
+#jspsych-survey-multi-select-response-0-5{
+    display: none;
+}

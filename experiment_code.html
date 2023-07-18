@@ -17,14 +17,12 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.2"></script>
      <!-- Image button response plugin -->
      <script src="https://unpkg.com/@jspsych/plugin-image-button-response@1.1.2"></script>
-    
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.2"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-multi-select@1.1.2"></script>
 
-
-
     <!-- Style from JsPsych -->
     <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <link href="local.css" rel="stylesheet"/>
 </head>
 <body>
     <!-- JsPsych script -->
@@ -32,7 +30,7 @@
        // Note that participant's response 0 corresponds to Yes and 1 corresponds to No. 
         // Bootstrap
         document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">')
-        document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/experiment_css.css" type="text/css">')
+        // document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/causal_css.css" type="text/css">')
         // Initialise and make data display at the end.
         var jsPsych = initJsPsych({
             on_finish: function(){
@@ -58,141 +56,141 @@
         // Push the welcome trial to the timeline
         timeline.push(welcome);
 
-        var consent = {
-            type: jsPsychHtmlButtonResponse,
-            stimulus: ` 
-                <div class='row'> 
-                    <div class = 'col consent'>
-                        <h2 style='text-align:center;margin-bottom:2%'>Informed Consent</h2>
-                        <hr>
-                        <p>By clicking the button 'Accept and continue' below you declare that:</p>
+//         var consent = {
+//             type: jsPsychHtmlButtonResponse,
+//             stimulus: ` 
+//                 <div class='row'> 
+//                     <div class = 'col consent'>
+//                         <h2 style='text-align:center;margin-bottom:2%'>Informed Consent</h2>
+//                         <hr>
+//                         <p>By clicking the button 'Accept and continue' below you declare that:</p>
 
-                        <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
+//                         <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
 
-                        <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
+//                         <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
 
-                        <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
+//                         <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
 
-                        <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
-                        <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
-                        <p>By clicking the button 'Accept and continue' below you consent to:</p>
-                        <ul>
-                            <li>Participate in this research </li>
-                            <li>Storage and processing of the anonymized data. </li>
-                        </ul>
-                    </div>
-                </div>
-            `,
-            choices: ['Decline and exit', '<b> Accept and continue</b>'],
-            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
-            on_finish: function(data){
-            // Cheeck if consent the response as correct or incorrect.
-            if(data.response == 1){
-            data.correct = true;
-            } else {
-            data.correct = false; 
-            }
-        }
-            };
-            var if_consent_trial = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: "<b>We cannot collect data from you without your consent. </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-        on_finish: function(){
-            window.location = 'https://app.prolific.co/'
-        },
-    trial_duration: 5000,
-    post_trial_gap: 1000,
-    };
+//                         <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
+//                         <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
+//                         <p>By clicking the button 'Accept and continue' below you consent to:</p>
+//                         <ul>
+//                             <li>Participate in this research </li>
+//                             <li>Storage and processing of the anonymized data. </li>
+//                         </ul>
+//                     </div>
+//                 </div>
+//             `,
+//             choices: ['Decline and exit', '<b> Accept and continue</b>'],
+//             button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+//             on_finish: function(data){
+//             // Cheeck if consent the response as correct or incorrect.
+//             if(data.response == 1){
+//             data.correct = true;
+//             } else {
+//             data.correct = false; 
+//             }
+//         }
+//             };
+//             var if_consent_trial = {
+//         type: jsPsychHtmlKeyboardResponse,
+//         stimulus: "<b>We cannot collect data from you without your consent. </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+//         on_finish: function(){
+//             window.location = 'https://app.prolific.co/'
+//         },
+//     trial_duration: 5000,
+//     post_trial_gap: 1000,
+//     };
 
-    var if_consent_node = {
-        timeline: [if_consent_trial],
-        conditional_function: function(){
-            var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-            if(last_trial_correct){
-                return false;
-            } else {
-                return true;
-            }
-        }
-    };
-        // Push the welcome trial to the timeline
-        // timeline.push(consent, if_consent_node);
+//     var if_consent_node = {
+//         timeline: [if_consent_trial],
+//         conditional_function: function(){
+//             var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+//             if(last_trial_correct){
+//                 return false;
+//             } else {
+//                 return true;
+//             }
+//         }
+//     };
+//         // Push the welcome trial to the timeline
+//         // timeline.push(consent, if_consent_node);
     
-    // Loop until the consent is given. To avoid 'go back' bug: previously it was possible to go back after being redirected and skip that question.
-    var loop_node = {
-    timeline: [consent, if_consent_node],
-    loop_function: function(data){
-        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
-        if(data.values()[0].correct){
-            return false;
-        } else {
-            return true;
-        }
-    }
-    };
+//     // Loop until the consent is given. To avoid 'go back' bug: previously it was possible to go back after being redirected and skip that question.
+//     var loop_node = {
+//     timeline: [consent, if_consent_node],
+//     loop_function: function(data){
+//         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+//         if(data.values()[0].correct){
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     }
+//     };
 
-timeline.push(loop_node);
+// timeline.push(loop_node);
 
-    var native = {
-        type: jsPsychSurveyMultiChoice,
-        questions: [
-            {
-            prompt: "Are you a native speaker of English?", 
-            options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
-            required: true
-            }   
-        ],
-        on_finish: function(data){
-        // Score the response as correct or incorrect.
-        if(data.response.Q0 == 'I am a native speaker of English.'){
-        data.correct = true;
-        } else {
-        data.correct = false; 
-        }
-    },
-    // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
-    };
-    var if_trial = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-        on_finish: function(){
-            window.location = 'https://app.prolific.co/'
-        },
-    trial_duration: 5000,
-    post_trial_gap: 1000,
-};
+//     var native = {
+//         type: jsPsychSurveyMultiChoice,
+//         questions: [
+//             {
+//             prompt: "Are you a native speaker of English?", 
+//             options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
+//             required: true
+//             }   
+//         ],
+//         on_finish: function(data){
+//         // Score the response as correct or incorrect.
+//         if(data.response.Q0 == 'I am a native speaker of English.'){
+//         data.correct = true;
+//         } else {
+//         data.correct = false; 
+//         }
+//     },
+//     // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
+//     };
+//     var if_trial = {
+//         type: jsPsychHtmlKeyboardResponse,
+//         stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+//         on_finish: function(){
+//             window.location = 'https://app.prolific.co/'
+//         },
+//     trial_duration: 5000,
+//     post_trial_gap: 1000,
+// };
 
-var if_node = {
-    timeline: [if_trial],
-    conditional_function: function(){
-        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-        if(last_trial_correct){
-            return false;
-        } else {
-            return true;
-        }
-    }
-};
-// Push the question about the native language and redirect if wrong answer
-var loop_node = {
-    timeline: [native, if_node],
-    loop_function: function(data){
-        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
-        if(data.values()[0].correct){
-            return false;
-        } else {
-            return true;
-        }
-    }
-    };
+// var if_node = {
+//     timeline: [if_trial],
+//     conditional_function: function(){
+//         var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+//         if(last_trial_correct){
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     }
+// };
+// // Push the question about the native language and redirect if wrong answer
+// var loop_node = {
+//     timeline: [native, if_node],
+//     loop_function: function(data){
+//         // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+//         if(data.values()[0].correct){
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     }
+//     };
 
-timeline.push(loop_node);
+// timeline.push(loop_node);
 
 //Instructions for switches
 var switches_inst = {
             type: jsPsychHtmlButtonResponse,
-            stimulus:` 
-                    <p>There are two switches, A and B, connected to a light. Part of the circuit is
+            stimulus:` <div >
+                    <p style="text-align:center;">There are two switches, A and B, connected to a light. Part of the circuit is
                         shaded grey. Each switch has three possible positions: up, in the middle, or
                         down. </p> 
                     <p> As the wiring indicates, the light is on just in case switch A is in the
@@ -201,9 +199,9 @@ var switches_inst = {
                     <p>Currently, switch A is in the middle and switch B is down, so the light is off.</p>
                     <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
 
-                    <p> In each trial of this part of the study you will be presented with the same electrical circuit,but the position of the switches may differ. </p>
+                    <p> In each trial of this part of the study you will be presented with the same electrical circuit, but the position of the switches may differ. </p>
                     <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
-
+                    </div>
                     ` ,
             choices: ['OK'],
             button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
@@ -217,7 +215,7 @@ stimulus:`
 
         <p> Consider the following sentence: </p>
          <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
-        <p> In this case you would evaluate is as true, since the swiches complete the wiring and the current can flow.</p>
+        <p> In this case you would evaluate is as true, since the swiches do not complete the wiring and the current cannot flow.</p>
 
         ` ,
 choices: ['OK'],
@@ -279,7 +277,7 @@ var switches_train_stimuli = [
 
 { stimulus:` 
  <img src='img/mu_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
 
 ` , 
@@ -291,7 +289,7 @@ sentence_light: 'off',
 
 { stimulus:` 
  <img src='img/dm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
 
 ` , 
@@ -303,7 +301,7 @@ sentence_light: 'on',
 
 { stimulus:` 
  <img src='img/mm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
 
 ` , 
@@ -315,7 +313,7 @@ sentence_light: 'on',
 
 { stimulus:` 
  <img src='img/ud_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
 
 ` , 
@@ -392,20 +390,20 @@ var switches_test_stimuli = [
 
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were outside the shaded region, the light would be on. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were outside the shaded area, the light would be on. </b></p>
 
 ` , 
 question_type: 'test', 
 condition: 'False',
 logical_ans: 2,
 switches_pos: 'md',
-sentence: 'If both switches were outside the shaded region, the light would be on.',
+sentence: 'If both switches were outside the shaded area, the light would be on.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the middle, the light would be on. </b></p>
 
 ` , 
@@ -418,59 +416,59 @@ sentence: 'If both switches were in the middle, the light would be on.',
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded region, the light would be on. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded area, the light would be on. </b></p>
 
 ` , 
 question_type: 'test', 
 condition: 'T1',
 logical_ans: 0,
 switches_pos: 'md',
-sentence: 'If switch B were in the shaded region, the light would be on.',
+sentence: 'If switch B were in the shaded area, the light would be on.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded region, both switches would be in the shaded region. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded area, both switches would be in the shaded area. </b></p>
 
 ` , 
 question_type: 'test', 
 condition: 'T2',
 logical_ans: 0,
 switches_pos: 'md',
-sentence: 'If switch B were in the shaded region, both switches would be in the shaded region.',
+sentence: 'If switch B were in the shaded area, both switches would be in the shaded area.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded region, switch B would be in the shaded region. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded area, switch B would be in the shaded area. </b></p>
 
 ` , 
 question_type: 'test', 
 condition: 'T3',
 logical_ans: 0,
 switches_pos: 'md',
-sentence: 'If both switches were in the shaded region, switch B would be in the shaded region.',
+sentence: 'If both switches were in the shaded area, switch B would be in the shaded area.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded region, the light would be on. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded area, the light would be on. </b></p>
 
 ` , 
 question_type: 'test', 
 condition: 'T4',
-logical_ans: 2,
+logical_ans: 3,
 switches_pos: 'md',
-sentence: 'If both switches were in the shaded region, the light would be on.',
+sentence: 'If both switches were in the shaded area, the light would be on.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on just in case switch A is in the middle and switch B is up or in the middle. </b></p>
 
 ` , 
@@ -483,7 +481,6 @@ sentence: 'The light is on just in case switch A is in the middle and switch B i
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is currently on. </b></p>
 
 ` , 
@@ -496,20 +493,20 @@ sentence: 'The light is currently on.',
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently outside the shaded region. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently in the shaded area. </b></p>
 
 ` , 
 question_type: 'filler', 
 condition: 'F3',
-logical_ans: 0,
+logical_ans: 2,
 switches_pos: 'md',
-sentence: 'Switch B is currently outside the shaded region.',
+sentence: 'Switch B is currently in the shaded area.',
 
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently in the middle. </b></p>
 
 ` , 
@@ -522,15 +519,15 @@ sentence: 'Switch B is currently in the middle.',
 },
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>A switch is in the shaded region just in case it is up or in the middle. </b></p>
+ 
+ <p style='margin-bottom:4%;font-size:110%;'> <b>A switch is in the shaded area just in case it is up or in the middle. </b></p>
 
 ` , 
 question_type: 'filler', 
 condition: 'F5',
 logical_ans: 0,
 switches_pos: 'md',
-sentence: 'A switch is in the shaded region just in case it is up or in the middle.',
+sentence: 'A switch is in the shaded area just in case it is up or in the middle.',
 
 },
 ];
@@ -575,7 +572,7 @@ var numbers = {
 
 { stimulus:` 
  <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
 
 ` , 
@@ -628,7 +625,7 @@ var candy = {
 
 { stimulus:` 
  <img src='img/num_test.png' style='width:90%;max-width:800px;height:auto;margin-bottom:4%;'></img>
- <p style='font-size:100%;'>Is the following sentence true?</p>
+ 
  <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand. </b></p>
 
 ` , 
@@ -654,43 +651,56 @@ var candy_procedure = {
 
     var pictures_1 = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "What would it look like if both switches were in the shaded region? Please click on all matching pictures.",
-    choices: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;">%choice%</button>',
+    stimulus: "What would it look like if both switches were in the shaded area? Please click on all matching pictures.",
+    choices: [    
+    "<img src='img/cut_uu.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/cut_um.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/cut_ud.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/cut_mu.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;;'></img>",
+    "<img src='img/cut_mm.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;'></img>",
+    "<img src='img/cut_md.png' style='width:90%;max-width:200px;height:auto;margin-bottom:4%;'></img>"],
+    button_html: '<button class="jspsych-btn " style="font-size:120%;">%choice%</button>',
     };
 
-    
-    
-    
+    function mark(picture) {
+        var image = document.getElementById(picture);
+        image.style.border = "10px solid #555";
+    };
+   
     var pictures_2 = {
     type: jsPsychSurveyMultiSelect,
-    questions: [{
-    prompt: "What would it look like if both switches were in the shaded region? Please click on all matching pictures.",
-    options: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",],
+    preamble: `
+        <p> Currently switch A is in the middle and switch B is down:</p>
+        <img src='img/cut_md.png' style='width:90%;max-width:220px;height:auto;' onclick='mark()'></img> 
+        <p> What would it look like if both switches were in the shaded area? Please click on all matching pictures. </p>
+        <p> When you are done click "Continue" at the bottom of the page.</p>
+       `,
+    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
+    questions: [{    
+    prompt: "",
+    // TO DO: Randomise!
+    options: [ 
+    "<img src='img/cut_uu.png' class='picture-select'id='picture1' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;' onclick='mark(`picture1`)'></img>",
+    "<img src='img/cut_um.png' class='picture-select'id='picture2' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture2`)'></img>",
+    "<img src='img/cut_ud.png' class='picture-select'id='picture3' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture3`)'></img>",
+    "<img src='img/cut_mu.png' class='picture-select'id='picture4' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture4`)'></img>",
+    "<img src='img/cut_mm.png' class='picture-select'id='picture5' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture5`)'></img>",
+    "<img src='img/cut_md.png' class='picture-select'id='picture6' style='width:90%;max-width:220px;height:auto;margin-bottom:4%;padding:7%;'onclick='mark(`picture6`)'></img>",],
     horizontal: true
     }]};
 
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
-timeline.push(switches_inst, switches_inst_2)
-timeline.push(switches_train_loop)
-timeline.push(switches_test_procedure);
+// timeline.push(switches_inst, switches_inst_2)
+// timeline.push(switches_train_loop)
+// timeline.push(switches_test_procedure);
 // timeline.push(candy_procedure);
 // timeline.push(numbers_procedure);
 
+//TO DO:add information about the ordering to every trial.
 
-timeline.push(pictures_1);
+// timeline.push(pictures_1);
 timeline.push(pictures_2);
 
 
