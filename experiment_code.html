@@ -404,18 +404,147 @@ var switches_test_stimuli = [
 { stimulus:` 
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  <p style='font-size:100%;'>Is the following sentence true?</p>
- <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were outside the shaded region, the light would be on. </b></p>
 
 ` , 
 question_type: 'test', 
-// context_type: 'neither', 
-// response_type: 'Yes', 
-// items: 'Big Ben, the London Eye', 
-// scenario: 'tourist office', 
-// condition: 'false', 
+condition: 'False',
+logical_ans: 2,
+switches_pos: 'md',
+sentence: 'If both switches were outside the shaded region, the light would be on.',
 
-}
-]
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the middle, the light would be on. </b></p>
+
+` , 
+question_type: 'test', 
+condition: 'True',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'If both switches were in the middle, the light would be on.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded region, the light would be on. </b></p>
+
+` , 
+question_type: 'test', 
+condition: 'T1',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'If switch B were in the shaded region, the light would be on.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded region, both switches would be in the shaded region. </b></p>
+
+` , 
+question_type: 'test', 
+condition: 'T2',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'If switch B were in the shaded region, both switches would be in the shaded region.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded region, switch B would be in the shaded region. </b></p>
+
+` , 
+question_type: 'test', 
+condition: 'T3',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'If both switches were in the shaded region, switch B would be in the shaded region.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded region, the light would be on. </b></p>
+
+` , 
+question_type: 'test', 
+condition: 'T4',
+logical_ans: 2,
+switches_pos: 'md',
+sentence: 'If both switches were in the shaded region, the light would be on.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on just in case switch A is in the middle and switch B is up or in the middle. </b></p>
+
+` , 
+question_type: 'filler', 
+condition: 'F1',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'The light is on just in case switch A is in the middle and switch B is up or in the middle.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>The light is currently on. </b></p>
+
+` , 
+question_type: 'filler', 
+condition: 'F2',
+logical_ans: 2,
+switches_pos: 'md',
+sentence: 'The light is currently on.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently outside the shaded region. </b></p>
+
+` , 
+question_type: 'filler', 
+condition: 'F3',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'Switch B is currently outside the shaded region.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently in the middle. </b></p>
+
+` , 
+question_type: 'filler', 
+condition: 'F4',
+logical_ans: 2,
+switches_pos: 'md',
+sentence: 'Switch B is currently in the middle.',
+
+},
+{ stimulus:` 
+ <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
+ <p style='font-size:100%;'>Is the following sentence true?</p>
+ <p style='margin-bottom:4%;font-size:110%;'> <b>A switch is in the shaded region just in case it is up or in the middle. </b></p>
+
+` , 
+question_type: 'filler', 
+condition: 'F5',
+logical_ans: 0,
+switches_pos: 'md',
+sentence: 'A switch is in the shaded region just in case it is up or in the middle.',
+
+},
+];
 
 
 // 
@@ -534,9 +663,9 @@ var candy_procedure = {
     };
 
 
-    var pictures = {
+    var pictures_1 = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "What would it look like if both switches were in the green region? Please click on all matching pictures.",
+    stimulus: "What would it look like if both switches were in the shaded region? Please click on all matching pictures.",
     choices: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
     "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
     "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
@@ -546,23 +675,23 @@ var candy_procedure = {
     button_html: '<button class="jspsych-btn" style="font-size:120%;">%choice%</button>',
     };
 
-    // timeline.push(pictures);
     
     
-    var pictures = {
+    
+    var pictures_2 = {
     type: jsPsychSurveyMultiSelect,
     questions: [{
-    prompt: "What would it look like if both switches were in the green region? Please click on all matching pictures.",
+    prompt: "What would it look like if both switches were in the shaded region? Please click on all matching pictures.",
     options: [ "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",
-    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;'></img>",],
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",
+    "<img src='img/md_l.png' style='width:90%;max-width:500px;height:auto;margin-bottom:4%;object-position:left;'></img>",],
     horizontal: true
     }]};
 
-    // timeline.push(pictures);
+    timeline.push(pictures);
 
 
 
@@ -571,14 +700,15 @@ var candy_procedure = {
 
 // Get a random number between 0 and 5
 var group = Math.floor(Math.random() * 5);
-timeline.push(switches_inst)
-timeline.push( switches_inst_2)
+timeline.push(switches_inst, switches_inst_2)
 timeline.push(switches_train_loop)
 timeline.push(switches_test_procedure);
 // timeline.push(candy_procedure);
 // timeline.push(numbers_procedure);
 
 
+timeline.push(pictures_1);
+timeline.push(pictures_2);
 
 
 var debrief_block = {
