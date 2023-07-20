@@ -4,6 +4,9 @@
         text-align: left;
         margin: 5% 10%;
     }
+    .mob-btn{
+        font-size: 120%;
+    }
 }
 
 .picture-select:hover{

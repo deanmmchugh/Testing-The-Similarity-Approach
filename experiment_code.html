@@ -52,7 +52,7 @@
             type: jsPsychHtmlButtonResponse,
             stimulus: ' <p style="margin-top:2%;"><b>Welcome!</b></p><p style="font-size:100%;margin-left:10%;margin-right:10%;">We are Dean McHugh and Tomasz Klochowicz from the University of Amsterdam. At the beginning, we would like to thank you for your participation in this study. It should take you no more than 15 minutes to answer all the questions. </p> <p style="font-size:100%;margin-left:10%;margin-right:10%;">The questions do not have "right" or "wrong" answers. Some of the questions may seem similar, but please answer all of them. The survey does not aim to test your general knowledge. Some of the questions may refer to real people or events, but the stories in the questions are completely made up for the sole purpose of this survey. If a story seems false or implausible to you, try to imagine the situation described by the story. If you have any questions, you can contact us by e-mail at: t.j.klochowicz@uva.nl.</p>',
             choices: ['OK'],
-            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            button_html: '<button class="jspsych-btn" style="margin-bottom:40px;">%choice%</button>',
             };
         // Push the welcome trial to the timeline
         timeline.push(welcome);
@@ -286,7 +286,7 @@ var switches_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
@@ -377,7 +377,7 @@ var switches_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
@@ -602,7 +602,7 @@ var candy_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'candy',
         question_type: jsPsych.timelineVariable('question_type'),
@@ -696,7 +696,7 @@ var candy_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'candy',
         question_type: jsPsych.timelineVariable('question_type'),
@@ -932,7 +932,7 @@ var numbers_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'numbers',
         question_type: jsPsych.timelineVariable('question_type'),
@@ -1024,7 +1024,7 @@ var numbers_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
     data: {
         scenario: 'numbers',
         question_type: jsPsych.timelineVariable('question_type'),
