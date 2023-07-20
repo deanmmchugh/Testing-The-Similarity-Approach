@@ -30,7 +30,7 @@
        // Note that participant's response 0 corresponds to Yes and 1 corresponds to No. 
         // Bootstrap
         document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">')
-        // document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/causal_css.css" type="text/css">')
+        document.querySelector('head').insertAdjacentHTML("beforeend",'<link rel="stylesheet" href="https://www.tklochowicz.com/assets/causal_css.css" type="text/css">')
         // Initialise and make data display at the end.
         var jsPsych = initJsPsych({
             on_finish: function(){
@@ -57,135 +57,135 @@
         // Push the welcome trial to the timeline
         timeline.push(welcome);
 
-//         var consent = {
-//             type: jsPsychHtmlButtonResponse,
-//             stimulus: ` 
-//                 <div class='row'> 
-//                     <div class = 'col consent'>
-//                         <h2 style='text-align:center;margin-bottom:2%'>Informed Consent</h2>
-//                         <hr>
-//                         <p>By clicking the button 'Accept and continue' below you declare that:</p>
+        var consent = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: ` 
+                <div class='row'> 
+                    <div class = 'col consent'>
+                        <h2 style='text-align:center;margin-bottom:2%'>Informed Consent</h2>
+                        <hr>
+                        <p>By clicking the button 'Accept and continue' below you declare that:</p>
 
-//                         <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
+                        <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
 
-//                         <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
+                        <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
 
-//                         <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
+                        <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
 
-//                         <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
-//                         <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
-//                         <p>By clicking the button 'Accept and continue' below you consent to:</p>
-//                         <ul>
-//                             <li>Participate in this research </li>
-//                             <li>Storage and processing of the anonymized data. </li>
-//                         </ul>
-//                     </div>
-//                 </div>
-//             `,
-//             choices: ['Decline and exit', '<b> Accept and continue</b>'],
-//             button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
-//             on_finish: function(data){
-//             // Cheeck if consent the response as correct or incorrect.
-//             if(data.response == 1){
-//             data.correct = true;
-//             } else {
-//             data.correct = false; 
-//             }
-//         }
-//             };
-//             var if_consent_trial = {
-//         type: jsPsychHtmlKeyboardResponse,
-//         stimulus: "<b>We cannot collect data from you without your consent. </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-//         on_finish: function(){
-//             window.location = 'https://app.prolific.co/'
-//         },
-//     trial_duration: 5000,
-//     post_trial_gap: 1000,
-//     };
+                        <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
+                        <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
+                        <p>By clicking the button 'Accept and continue' below you consent to:</p>
+                        <ul>
+                            <li>Participate in this research </li>
+                            <li>Storage and processing of the anonymized data. </li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+            choices: ['Decline and exit', '<b> Accept and continue</b>'],
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            on_finish: function(data){
+            // Cheeck if consent the response as correct or incorrect.
+            if(data.response == 1){
+            data.correct = true;
+            } else {
+            data.correct = false; 
+            }
+        }
+            };
+            var if_consent_trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<b>We cannot collect data from you without your consent. </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+        on_finish: function(){
+            window.location = 'https://app.prolific.co/'
+        },
+    trial_duration: 5000,
+    post_trial_gap: 1000,
+    };
 
-//     var if_consent_node = {
-//         timeline: [if_consent_trial],
-//         conditional_function: function(){
-//             var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-//             if(last_trial_correct){
-//                 return false;
-//             } else {
-//                 return true;
-//             }
-//         }
-//     };
-//         // Push the welcome trial to the timeline
-//         // timeline.push(consent, if_consent_node);
+    var if_consent_node = {
+        timeline: [if_consent_trial],
+        conditional_function: function(){
+            var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+            if(last_trial_correct){
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
+        // Push the welcome trial to the timeline
+        // timeline.push(consent, if_consent_node);
     
-//     // Loop until the consent is given. To avoid 'go back' bug: previously it was possible to go back after being redirected and skip that question.
-//     var loop_node = {
-//     timeline: [consent, if_consent_node],
-//     loop_function: function(data){
-//         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
-//         if(data.values()[0].correct){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-//     };
+    // Loop until the consent is given. To avoid 'go back' bug: previously it was possible to go back after being redirected and skip that question.
+    var loop_node = {
+    timeline: [consent, if_consent_node],
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    };
 
-// timeline.push(loop_node);
+timeline.push(loop_node);
 
-//     var native = {
-//         type: jsPsychSurveyMultiChoice,
-//         questions: [
-//             {
-//             prompt: "Are you a native speaker of English?", 
-//             options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
-//             required: true
-//             }   
-//         ],
-//         on_finish: function(data){
-//         // Score the response as correct or incorrect.
-//         if(data.response.Q0 == 'I am a native speaker of English.'){
-//         data.correct = true;
-//         } else {
-//         data.correct = false; 
-//         }
-//     },
-//     // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
-//     };
-//     var if_trial = {
-//         type: jsPsychHtmlKeyboardResponse,
-//         stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-//         on_finish: function(){
-//             window.location = 'https://app.prolific.co/'
-//         },
-//     trial_duration: 5000,
-//     post_trial_gap: 1000,
-// };
+    var native = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
+            {
+            prompt: "Are you a native speaker of English?", 
+            options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
+            required: true
+            }   
+        ],
+        on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response.Q0 == 'I am a native speaker of English.'){
+        data.correct = true;
+        } else {
+        data.correct = false; 
+        }
+    },
+    // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
+    };
+    var if_trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+        on_finish: function(){
+            window.location = 'https://app.prolific.co/'
+        },
+    trial_duration: 5000,
+    post_trial_gap: 1000,
+};
 
-// var if_node = {
-//     timeline: [if_trial],
-//     conditional_function: function(){
-//         var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-//         if(last_trial_correct){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-// };
-// // Push the question about the native language and redirect if wrong answer
-// var loop_node = {
-//     timeline: [native, if_node],
-//     loop_function: function(data){
-//         // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
-//         if(data.values()[0].correct){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-//     };
+var if_node = {
+    timeline: [if_trial],
+    conditional_function: function(){
+        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+        if(last_trial_correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+// Push the question about the native language and redirect if wrong answer
+var loop_node = {
+    timeline: [native, if_node],
+    loop_function: function(data){
+        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    };
 
-// timeline.push(loop_node);
+timeline.push(loop_node);
 
 // Create feedback trial, which will appear once a training item is answered
 var feedback = {
@@ -719,79 +719,77 @@ var candy_test_stimuli = [
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been chocolate flavoured, they would both have been happy with their candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had fruit-flavoured candy, they would both be happy with their candy. </b></p>
 ` , 
 question_type: 'test', 
 condition: 'False',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'If both of the childrenʼs candy had been chocolate flavoured, they would both have been happy with their candy.',
+sentence: 'If both children had fruit-flavoured candy, they would both be happy with their candy.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been strawberry flavoured, they would both have been happy with their candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had strawberry-flavoured candy, they would both be happy with their candy. </b></p>
 ` , 
 question_type: 'test', 
 condition: 'True',
 predicted_ans: 0,
 candy_pos: 'sm',
-sentence: 'If both of the childrenʼs candy had been strawberry flavoured, they would both have been happy with their candy.',
-
+sentence: 'If both children had strawberry-flavoured candy, they would both be happy with their candy'
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bobʼs candy had been fruit-flavoured, both of the children would have been happy with their candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children would be happy with their candy. </b></p>
 ` , 
 question_type: 'test', 
 condition: 'T1',
 predicted_ans: 0,
 candy_pos: 'sm',
-sentence: 'If Bobʼs candy had been fruit-flavoured, both of the children would have been happy with their candy',
+sentence: 'If Bob’s candy were fruit-flavoured, both children would be happy with their candy.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bobʼs candy had been fruit-flavoured, both of the childrenʼs candy would have been fruit-flavoured. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children’s candy would be fruit-flavoured.</b></p>
 ` , 
 question_type: 'test', 
 condition: 'T2',
 predicted_ans: 0,
 candy_pos: 'sm',
-sentence: 'If Bobʼs candy had been fruit-flavoured, both of the childrenʼs candy would have been fruit-flavoured.',
+sentence: 'If Bob’s candy were fruit-flavoured, both children’s candy would be fruit-flavoured.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been fruit-flavoured, Bobʼs candy would have been fruit-flavoured. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, Bob’s candy would be fruit-flavoured. </b></p>
 ` , 
 question_type: 'test', 
 condition: 'T3',
 predicted_ans: 0,
 candy_pos: 'sm',
-sentence: 'If both of the childrenʼs candy had been fruit-flavoured, Bobʼs candy would have been fruit-flavoured.',
+sentence: 'If both children’s candy were fruit-flavoured, Bob’s candy would be fruit-flavoured.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>If both of the childrenʼs candy had been fruit-flavoured, both of the children
-would have been happy with their candy.</b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, both children would be happy with their candy.</b></p>
 ` , 
 question_type: 'test', 
 condition: 'T4',
 predicted_ans: 3,
 candy_pos: 'sm',
-sentence: 'If both of the childrenʼs candy had been fruit-flavoured, both of the children would have been happy with their candy.',
+sentence: 'If both children’s candy were fruit-flavoured, both children would be happy with their candy.',
 
 },
 { stimulus:` 
@@ -811,13 +809,13 @@ sentence: 'Both Alice and Bob are happy just in case Alice gets a strawberry-fla
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both of the children were happy with the candy they received. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children were happy with the candy they received. </b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F2',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Both of the children were happy with the candy they received.',
+sentence: 'Both children were happy with the candy they received.',
 
 },
 
@@ -825,52 +823,52 @@ sentence: 'Both of the children were happy with the candy they received.',
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob got a fruit-flavoured candy.</b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a fruit-flavoured candy..</b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F3',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Bob got a fruit-flavoured candy.',
+sentence: 'Bob currently has a fruit-flavoured candy.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob got a strawberry-flavoured candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a strawberry-flavoured candy. </b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F4',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Bob got a strawberry-flavoured candy',
+sentence: 'Bob currently has a strawberry-flavoured candy.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>The teacherʼs bag contains banana-flavoured candy. </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>The teacher’s bag contains banana-flavoured candy. </b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F5',
 predicted_ans: 0,
 candy_pos: 'sm',
-sentence: 'The teacherʼs bag contains banana-flavoured candy.',
+sentence: 'The teacher’s bag contains banana-flavoured candy.',
 
 },
 { stimulus:` 
     <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both of the childrenʼs candy are fruit-flavoured.</b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children currently have fruit-flavoured candy.</b></p>
 ` , 
 question_type: 'filler', 
 condition: 'F6',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Both of the childrenʼs candy are fruit-flavoured.',
+sentence: 'Both children currently have fruit-flavoured candy.',
 
 },
 ];
