@@ -22,7 +22,7 @@
 
     <!-- Style from JsPsych -->
     <link href="https://unpkg.com/jspsych@7.3.2/css/jspsych.css" rel="stylesheet" type="text/css" />
-    <link href="local.css" rel="stylesheet"/>
+    <!-- <link href="local.css" rel="stylesheet"/> -->
 </head>
 <body>
     <!-- JsPsych script -->
@@ -34,8 +34,7 @@
         // Initialise and make data display at the end.
         var jsPsych = initJsPsych({
             on_finish: function(){
-                jsPsych.data.displayData();
-                // window.location = "https://app.prolific.co/"
+                window.location = "https://app.prolific.co/"
             }
             });
 
@@ -44,15 +43,16 @@
         // Prelod all images before the experiment begins to avoid waiting time later. 
         var preload = {
             type: jsPsychPreload,
-            images: ['img/cut_dd.png', 'img/cut_dm.png', 'img/cut_du.png', 'img/cut_md.png', 'img/cut_mm.png', 'img/cut_mu.png', 'img/cut_ud.png', 'img/cut_um.png', 'img/cut_uu.png', 'img/c_a_b_im.png', 'img/c_a_b_q.png', 'img/c_a_s_im.png', 'img/c_a_s_q.png', 'img/c_bch_cut.png', 'img/c_bs_cut.png', 'img/c_b_b_im.png', 'img/c_b_b_q.png', 'img/c_b_ch_im.png', 'img/c_b_ch_q.png', 'img/c_b_m_im.png', 'img/c_b_m_q.png', 'img/c_b_s_im.png', 'img/c_b_s_q.png', 'img/c_chs_cut.png', 'img/c_ch_s_im.png', 'img/c_sb_cut.png', 'img/c_sm_cut.png', 'img/c_ss_cut.png', 'img/c_t1_q.png', 'img/c_t2_im.png', 'img/c_t2_q.png', 'img/c_t3_im.png', 'img/c_t3_q.png', 'img/c_t4_im.png', 'img/c_t4_q.png', 'img/c_test_im.png', 'img/c_test_q.png', 'img/c_tq_im.png', 'img/dd_q.png', 'img/dm_l.png', 'img/dm_q.png', 'img/du_l.png', 'img/du_q.png', 'img/md_l.png', 'img/md_q.png', 'img/mm_l.png', 'img/mm_q.png', 'img/mu_l.png', 'img/mu_q.png', 'img/n_1212_cut.png', 'img/n_1223_cut.png', 'img/n_1242_cut.png', 'img/n_1314_cut.png', 'img/n_2233_cut.png', 'img/n_4231_cut.png', 'img/n_t1_im.png', 'img/n_t1_q.png', 'img/n_t2_im.png', 'img/n_t2_q.png', 'img/n_t3_im.png', 'img/n_t3_q.png', 'img/n_t4_im.png', 'img/n_t4_q.png', 'img/n_test_im.png', 'img/n_test_q.png', 'img/ud_l.png', 'img/ud_q.png', 'img/um_l.png', 'img/um_q.png', 'img/uu_l.png', 'img/uu_q.png',] };
+            images: ['img/inst_candy.png', 'img/cut_dd.png', 'img/cut_dm.png', 'img/cut_du.png', 'img/cut_md.png', 'img/cut_mm.png', 'img/cut_mu.png', 'img/cut_ud.png', 'img/cut_um.png', 'img/cut_uu.png', 'img/c_a_b_im.png', 'img/c_a_b_q.png', 'img/c_a_s_im.png', 'img/c_a_s_q.png', 'img/c_bch_cut.png', 'img/c_bs_cut.png', 'img/c_b_b_im.png', 'img/c_b_b_q.png', 'img/c_b_ch_im.png', 'img/c_b_ch_q.png', 'img/c_b_m_im.png', 'img/c_b_m_q.png', 'img/c_b_s_im.png', 'img/c_b_s_q.png', 'img/c_chs_cut.png', 'img/c_ch_s_im.png', 'img/c_sb_cut.png', 'img/c_sm_cut.png', 'img/c_ss_cut.png', 'img/c_t1_q.png', 'img/c_t2_im.png', 'img/c_t2_q.png', 'img/c_t3_im.png', 'img/c_t3_q.png', 'img/c_t4_im.png', 'img/c_t4_q.png', 'img/c_test_im.png', 'img/c_test_q.png', 'img/c_tq_im.png', 'img/dd_q.png', 'img/dm_l.png', 'img/dm_q.png', 'img/du_l.png', 'img/du_q.png', 'img/md_l.png', 'img/md_q.png', 'img/mm_l.png', 'img/mm_q.png', 'img/mu_l.png', 'img/mu_q.png', 'img/1322.png', 'img/1324.png', 'img/1334.png', 'img/1422.png', 'img/2324.png', 'img/4334.png', 'img/n_t1_im.png', 'img/n_t1_q.png', 'img/n_t2_im.png', 'img/n_t2_q.png', 'img/n_t3_im.png', 'img/n_t3_q.png', 'img/n_t4_im.png', 'img/n_t4_q.png', 'img/n_test_im.png', 'img/n_test_q.png', 'img/ud_l.png', 'img/ud_q.png', 'img/um_l.png', 'img/um_q.png', 'img/uu_l.png', 'img/uu_q.png',] };
             timeline.push(preload);
 
-
+            // Get a random number between 0 and 5
+            var group = Math.floor(Math.random() * 5);
         var welcome = {
             type: jsPsychHtmlButtonResponse,
             stimulus: ' <p style="margin-top:2%;"><b>Welcome!</b></p><p style="font-size:100%;margin-left:10%;margin-right:10%;">We are Dean McHugh and Tomasz Klochowicz from the University of Amsterdam. At the beginning, we would like to thank you for your participation in this study. It should take you no more than 15 minutes to answer all the questions. </p> <p style="font-size:100%;margin-left:10%;margin-right:10%;">The questions do not have "right" or "wrong" answers. Some of the questions may seem similar, but please answer all of them. The survey does not aim to test your general knowledge. Some of the questions may refer to real people or events, but the stories in the questions are completely made up for the sole purpose of this survey. If a story seems false or implausible to you, try to imagine the situation described by the story. If you have any questions, you can contact us by e-mail at: t.j.klochowicz@uva.nl.</p>',
             choices: ['OK'],
-            button_html: '<button class="jspsych-btn" style="margin-bottom:40px;">%choice%</button>',
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
             };
         // Push the welcome trial to the timeline
         timeline.push(welcome);
@@ -66,13 +66,13 @@
                         <hr>
                         <p>By clicking the button 'Accept and continue' below you declare that:</p>
 
-                        <p>You have been clearly informed about the research: NihiL - the neglect-zero effect in modal and nominal domains, research project conducted by Dean McHugh and Tomasz Klochowicz reaserchs at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
+                        <p>You have been clearly informed about the research:  Similarity and Aboutness in Conditionals, research project conducted by Tomasz Klochowicz (PhD student) and Dean McHugh (postdoc) at the University of Amsterdam, Institute for Logic Language and Computation, as described in the information brochure displayed at prolific.co. You declare that your questions have been answered to your satisfaction.</p>
 
                         <p>You realise that participation in this research is on an entirely voluntary basis. You retain the right to revoke this consent without having to provide any reasons for my decision. You are aware that you are entitled to discontinue the research at any time, and that you can always withdraw your consent after the research has ended. If you decide to stop or withdraw your consent, all the information gathered up until then will be permanently deleted.</p>
 
                         <p>If your data are used in scientific publications or made public in any other way, they will be fully anonymised. Your personal information may not be viewed by third parties.</p>
 
-                        <p>If you need any further information on the research, now or in the future, you can contact Maria Aloni (m.d.aloni@uva.nl) or Tomasz Klochowicz (email: t.j.klochowicz@uva.nl; Universiteit van Amsterdam p.o. box 94242 1090 GE Amsterdam)</p>
+                        <p>If you need any further information on the research, now or in the future, you can contact Tomasz Klochowicz (email: t.j.klochowicz@uva.nl) or Dean McHugh (d.m.mchugh@uva.nl); Universiteit van Amsterdam P.O. Box 94242 1090 GE Amsterdam.</p>
                         <p>If you have any complaints regarding this research, you can contact the secretary of the Ethics Committee of the Faculty of Humanities of the University of Amsterdam; email: commissie-ethiek-fgw@uva.nl; phone number: +31 20 525 3054; Binnengasthuisstraat 9, 1012 ZA Amsterdam.</p>
                         <p>By clicking the button 'Accept and continue' below you consent to:</p>
                         <ul>
@@ -103,6 +103,7 @@
     post_trial_gap: 1000,
     };
 
+
     var if_consent_node = {
         timeline: [if_consent_trial],
         conditional_function: function(){
@@ -132,60 +133,60 @@
 
 timeline.push(loop_node);
 
-    var native = {
-        type: jsPsychSurveyMultiChoice,
-        questions: [
-            {
-            prompt: "Are you a native speaker of English?", 
-            options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
-            required: true
-            }   
-        ],
-        on_finish: function(data){
-        // Score the response as correct or incorrect.
-        if(data.response.Q0 == 'I am a native speaker of English.'){
-        data.correct = true;
-        } else {
-        data.correct = false; 
-        }
-    },
-    // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
-    };
-    var if_trial = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-        on_finish: function(){
-            window.location = 'https://app.prolific.co/'
-        },
-    trial_duration: 5000,
-    post_trial_gap: 1000,
-};
+//     var native = {
+//         type: jsPsychSurveyMultiChoice,
+//         questions: [
+//             {
+//             prompt: "Are you a native speaker of English?", 
+//             options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
+//             required: true
+//             }   
+//         ],
+//         on_finish: function(data){
+//         // Score the response as correct or incorrect.
+//         if(data.response.Q0 == 'I am a native speaker of English.'){
+//         data.correct = true;
+//         } else {
+//         data.correct = false; 
+//         }
+//     },
+//     // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
+//     };
+//     var if_trial = {
+//         type: jsPsychHtmlKeyboardResponse,
+//         stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+//         on_finish: function(){
+//             window.location = 'https://app.prolific.co/'
+//         },
+//     trial_duration: 5000,
+//     post_trial_gap: 1000,
+// };
 
-var if_node = {
-    timeline: [if_trial],
-    conditional_function: function(){
-        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-        if(last_trial_correct){
-            return false;
-        } else {
-            return true;
-        }
-    }
-};
-// Push the question about the native language and redirect if wrong answer
-var loop_node = {
-    timeline: [native, if_node],
-    loop_function: function(data){
-        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
-        if(data.values()[0].correct){
-            return false;
-        } else {
-            return true;
-        }
-    }
-    };
+// var if_node = {
+//     timeline: [if_trial],
+//     conditional_function: function(){
+//         var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+//         if(last_trial_correct){
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     }
+// };
+// // Push the question about the native language and redirect if wrong answer
+// var loop_node = {
+//     timeline: [native, if_node],
+//     loop_function: function(data){
+//         // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+//         if(data.values()[0].correct){
+//             return false;
+//         } else {
+//             return true;
+//         }
+//     }
+//     };
 
-timeline.push(loop_node);
+// timeline.push(loop_node);
 
 // Create feedback trial, which will appear once a training item is answered
 var feedback = {
@@ -256,7 +257,7 @@ var switches_inst = {
                     <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
 
                     <p> In each trial of this part of the study you will be presented with the same electrical circuit, but the position of the switches may differ. </p>
-                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+                    <p> You will be asked to evaluate whether a sentence describing the picture is true, false or indeterminate. </p>
                     </div>
                     ` ,
             choices: ['OK'],
@@ -266,12 +267,12 @@ var switches_inst = {
 var switches_inst_2 = {
 type: jsPsychHtmlButtonResponse,
 stimulus:` 
-        <p>Sometimes the light will be covered with a question mark. It means that you need to figure out if the light is on or off.</p>
+        <p>Sometimes the light will be covered with a question mark. It means that you need to figure out whether the light is on or off.</p>
         <img src='img/md_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
 
         <p> Consider the following sentence: </p>
          <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
-        <p> In this case you would evaluate is as true, since the swiches do not complete the wiring and the current cannot flow.</p>
+        <p> In this case you would evaluate it as true, since the swiches do not complete the wiring and the current cannot flow.</p>
 
         ` ,
 choices: ['OK'],
@@ -286,11 +287,11 @@ var switches_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
     data: {
         scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -377,11 +378,11 @@ var switches_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -561,33 +562,47 @@ var candy_inst = {
             stimulus:` <div >
                     <p style="margin-top:5%;">A school teacher has a bag containing many kinds of candy.</p>  
                         
-                    <p> Some candies in the bag are fruit-flavoured, including strawberry-flavoured candy, banana-flavoured candy, and cherry-flavoured candy. 
-                        The bag also contains candy that is not fruit-flavoured, such as chocolate, toffee, and mints. Alice and Bob are two kids in the teacher's class.</p> 
-                    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes
-                                    all fruit flavoured candy, but does not like any other kind of candy. </p> 
+                    <p> Some candies in the bag are fruit-flavoured, including strawberry-flavoured candy, banana-flavoured candy, and cherry-flavoured candy. </p>
+                        <p>The bag also contains candy that is not fruit-flavoured, such as chocolate, toffee, and mints.</p> 
+                    
+                    <p> Here are some of the candy flavours: </p> 
                         
-                    <p>At the end of the school day, the teacher gave a piece of candy to each child by picking one at random from the bag.</p>
-                    <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-                    <img src='img/c_b_b_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-
-                    <p> In each trial of this part of the study you will be presented with a picture indicating which child got which candy. </p>
-                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+                        <img src='img/inst_candy.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+                        
+                   
                     </div>
                     ` ,
             choices: ['OK'],
             button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
             post_trial_gap: 400
             };
+
 var candy_inst_2 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+                <p>    Alice and Bob are two kids in the teacher's class. Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes
+                                    all fruit-flavoured candy, but does not like any other kind of candy. </p>
+            <p>At the end of the school day, the teacher gave a piece of candy to each child by picking one at random from the bag.</p>
+            <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+            <img src='img/c_b_b_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+
+            <p> In each trial of this part of the study you will be presented with a picture indicating which child got which candy. </p>
+            <p> You will be asked to evaluate whether a sentence describing the picture is true, false or indeterminate. </p>
+            ` ,
+    choices: ['OK'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+    post_trial_gap: 400
+    };
+var candy_inst_3 = {
 type: jsPsychHtmlButtonResponse,
 stimulus:` 
         <p style="margin-top:5%;"> Sometimes the children's preferences will be covered with question marks. It means that you need to figure out whether the child was happy their candy. </p>
-        <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-        <img src='img/c_b_b_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+        <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+        <img src='img/c_b_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
 
         <p> Consider the following sentence: </p>
          <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
-        <p> In this case you would evaluate this sentence as true, since Alice got strawberry-flavoured candy and Bob a fruit flavoured candy.</p>
+        <p> In this case you would evaluate this sentence as true, since Alice got strawberry-flavoured candy and Bob a fruit-flavoured candy.</p>
 
         ` ,
 choices: ['OK'],
@@ -602,11 +617,11 @@ var candy_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'candy',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -623,7 +638,7 @@ var candy_train = {
 var candy_train_stimuli = [
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
                         
     <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
@@ -637,7 +652,7 @@ sentence_light: 'unhappy',
 },
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>                 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>                 
     <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
@@ -650,7 +665,7 @@ sentence_light: 'happy',
 },
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
                         
     <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
@@ -663,7 +678,7 @@ sentence_light: 'happy',
 },
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
                         
     <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_ch_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
@@ -696,11 +711,11 @@ var candy_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'candy',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -716,7 +731,7 @@ var candy_test = {
 var candy_test_stimuli = [
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had fruit-flavoured candy, they would both be happy with their candy. </b></p>
@@ -729,7 +744,7 @@ sentence: 'If both children had fruit-flavoured candy, they would both be happy 
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had strawberry-flavoured candy, they would both be happy with their candy. </b></p>
@@ -741,7 +756,7 @@ candy_pos: 'sm',
 sentence: 'If both children had strawberry-flavoured candy, they would both be happy with their candy'
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children would be happy with their candy. </b></p>
@@ -754,7 +769,7 @@ sentence: 'If Bob’s candy were fruit-flavoured, both children would be happy w
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children’s candy would be fruit-flavoured.</b></p>
@@ -767,7 +782,7 @@ sentence: 'If Bob’s candy were fruit-flavoured, both children’s candy would 
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, Bob’s candy would be fruit-flavoured. </b></p>
@@ -780,7 +795,7 @@ sentence: 'If both children’s candy were fruit-flavoured, Bob’s candy would 
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, both children would be happy with their candy.</b></p>
@@ -793,7 +808,7 @@ sentence: 'If both children’s candy were fruit-flavoured, both children would 
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both Alice and Bob are happy just in case Alice gets a strawberry-flavoured candy and Bob gets a fruit-flavoured candy. </b></p>
@@ -806,7 +821,7 @@ sentence: 'Both Alice and Bob are happy just in case Alice gets a strawberry-fla
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both children were happy with the candy they received. </b></p>
@@ -820,7 +835,7 @@ sentence: 'Both children were happy with the candy they received.',
 },
 
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a fruit-flavoured candy..</b></p>
@@ -833,7 +848,7 @@ sentence: 'Bob currently has a fruit-flavoured candy.',
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a strawberry-flavoured candy. </b></p>
@@ -846,7 +861,7 @@ sentence: 'Bob currently has a strawberry-flavoured candy.',
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>The teacher’s bag contains banana-flavoured candy. </b></p>
@@ -859,7 +874,7 @@ sentence: 'The teacher’s bag contains banana-flavoured candy.',
 
 },
 { stimulus:` 
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p>             
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both children currently have fruit-flavoured candy.</b></p>
@@ -903,7 +918,7 @@ var numbers_inst = {
                     <img src='img/n_t1_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
 
                     <p> In each trial of this part of the study you will be presented with a picture showing a score of the game. </p>
-                    <p> You will be asked to evaluate whether a sentence describing the picture is true. </p>
+                    <p> You will be asked to evaluate whether a sentence describing the picture is true, false or indeterminate. </p>
                     </div>
                     ` ,
             choices: ['OK'],
@@ -918,7 +933,7 @@ stimulus:`
 
         <p> Consider the following sentence: </p>
          <p style='margin-bottom:4%;font-size:110%;'> <b>Kim has a winning hand </b></p>
-        <p> In this case you would evaluate this sentence as true, since both Kim's cards are higher than Alex's cards.</p>
+        <p> In this case you would evaluate this sentence as true, since Kim's red number is higher than Alex's red number and Kim's blue number is higher than Alex's blue number.</p>
 
         ` ,
 choices: ['OK'],
@@ -932,11 +947,11 @@ var numbers_train = {
     type: jsPsychHtmlButtonResponse,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'numbers',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -957,7 +972,7 @@ var numbers_train_stimuli = [
     <p>Otherwise the result is a draw.</p>
                         
     <img src='img/n_t1_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a wining hand.  </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
 
 ` , 
 question_type: 'training', 
@@ -970,7 +985,7 @@ sentence_light: 'win',
     <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_t2_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a wining hand.  </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
 
 ` , 
 question_type: 'training', 
@@ -983,7 +998,7 @@ sentence_light: 'not win',
     <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_t3_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a wining hand.  </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
 ` , 
 question_type: 'training', 
 cor_ans: 2, 
@@ -995,7 +1010,7 @@ sentence_light: 'win',
     <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_t4_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a wining hand.  </b></p>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
 ` , 
 question_type: 'training', 
 cor_ans: 0, 
@@ -1024,11 +1039,11 @@ var numbers_test = {
     post_trial_gap: 400,
     stimulus:jsPsych.timelineVariable('stimulus'),
     choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn" style="font-size:120%;"">%choice%</button>',
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'numbers',
         question_type: jsPsych.timelineVariable('question_type'),
-        // response_type: jsPsych.timelineVariable('response_type'),
+        group: group,
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -1284,8 +1299,8 @@ var numbers_test_procedure = {
     var candy_pictures = {
     type: jsPsychSurveyMultiSelect,
     preamble: `
-    <p>  Alice likes strawberry flavoured candy and does not like any other kind of candy. Bob likes all fruit flavoured candy, but does not like any other kind of candy. </p> 
-    <p>  Alice got strawberry flavoured candy and Bob got a mint. </p> 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
+    <p>  Alice got strawberry-flavoured candy and Bob got a mint. </p> 
     <img src='img/c_a_s_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img>
         <p> What would it look like if both of the childrenʼs candy had been fruit-flavoured? Please click on all matching pictures. </p>
@@ -1320,42 +1335,213 @@ var numbers_test_procedure = {
     questions: [{    
     prompt: "",
     options: shuffle([ 
-    "<img src='img/n_1212_cut.png' class='picture-select' id='picture21' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture21`)'></img>",
-    "<img src='img/n_1223_cut.png' class='picture-select' id='picture22' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture22`)'></img>",
-    "<img src='img/n_1242_cut.png' class='picture-select' id='picture23' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture23`)'></img>",
-    "<img src='img/n_1314_cut.png' class='picture-select' id='picture24' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture24`)'></img>",
-    "<img src='img/n_2233_cut.png' class='picture-select' id='picture25' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture25`)'></img>",
-    "<img src='img/n_4231_cut.png' class='picture-select' id='picture26' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture26`)'></img>",
+    "<img src='img/1322.png' class='picture-select' id='picture21' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture21`)'></img>",
+    "<img src='img/1324.png' class='picture-select' id='picture22' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture22`)'></img>",
+    "<img src='img/1334.png' class='picture-select' id='picture23' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture23`)'></img>",
+    "<img src='img/1422.png' class='picture-select' id='picture24' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture24`)'></img>",
+    "<img src='img/2324.png' class='picture-select' id='picture25' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture25`)'></img>",
+    "<img src='img/4334.png' class='picture-select' id='picture26' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture26`)'></img>",
         ]),
     horizontal: true
     }]};
 
 
+    // Scenario cards before scenarios
+    var scenario_1 = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: ' <p style="margin-top:2%;font-size:200%;"><b>Scenario 1</b></p><hr style="margin-bottom:20%;">',
+            button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+            trial_duration: 1000,
+            choices: ['NO_KEYS'],
+            };
+    
+    var scenario_2 = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: ' <p style="margin-top:2%;font-size:200%;"><b>Scenario 2</b></p><hr style="margin-bottom:20%;">',
+    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+    trial_duration: 1000,
+    choices: ['NO_KEYS'],
+    };
+
+    var scenario_3 = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: ' <p style="margin-top:2%;font-size:200%;"><b>Scenario 3</b></p><hr style="margin-bottom:20%;">',
+    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+    trial_duration: 1000,
+    choices: ['NO_KEYS'],
+    };
 
 
-// Get a random number between 0 and 5
-var group = Math.floor(Math.random() * 5);
+    var picture_selection = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+         <p style='font-size:110%;'>Now you will revisit all the scenarios once again in a different task.</p>
+         <p style='font-size:110%;'><b>You will be asked to select some pictures.</b></p>
 
-// // Switches group
-timeline.push(switches_inst, switches_inst_2)
-timeline.push(switches_train_loop)
-timeline.push(switches_test_procedure);
+    `,
+    choices: ['OK'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+    post_trial_gap: 400
+    };
 
-// // Candy group
-timeline.push(candy_inst, candy_inst_2)
-timeline.push(candy_train_loop)
-timeline.push(candy_test_procedure);
+        
+// Add instructions and a delay after they appear
+var end_feedback = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+         <p style='font-size:110%;'>This is the end of the training part for this scenario.</p>
+         <p style='font-size:110%;'><b>From now on you will not receive any feedback on your answers.</b></p>
 
-// Numbers group
-timeline.push(numbers_inst, numbers_inst_2)
-timeline.push(numbers_train_loop)
-timeline.push(numbers_test_procedure);
+    `,
+    choices: ['OK'],
+    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
+    post_trial_gap: 400
+    };
+
+// Push the instructions trial to the timeline
+
+
+// timeline.push(scenario_1);
+// // // Switches group
+// timeline.push(switches_inst, switches_inst_2)
+// timeline.push(switches_train_loop)
+// timeline.push(end_feedback);
+// timeline.push(switches_test_procedure);
+
+// timeline.push(scenario_2);
+// // // Candy group
+// timeline.push(candy_inst, candy_inst_2)
+// timeline.push(candy_train_loop)
+// timeline.push(end_feedback);
+// timeline.push(candy_test_procedure);
+
+// timeline.push(scenario_3);
+// // Numbers group
+// timeline.push(numbers_inst, numbers_inst_2)
+// timeline.push(numbers_train_loop)
+// timeline.push(end_feedback);
+// timeline.push(numbers_test_procedure);
+
+
+
+
+
 
 //TO DO:add information about the ordering to every trial.
 
-timeline.push(switches_pictures);
-timeline.push(candy_pictures);
-timeline.push(numbers_pictures);
+
+
+
+// Switches function
+function swiches() { 
+    timeline.push(switches_inst, switches_inst_2)
+    timeline.push(switches_train_loop)
+    timeline.push(end_feedback);
+    timeline.push(switches_test_procedure);
+}
+
+// Candy function
+function candy(){
+timeline.push(candy_inst, candy_inst_2, candy_inst_3)
+timeline.push(candy_train_loop)
+timeline.push(end_feedback);
+timeline.push(candy_test_procedure);
+}
+
+function numbers(){
+timeline.push(numbers_inst, numbers_inst_2)
+timeline.push(numbers_train_loop)
+timeline.push(end_feedback);
+timeline.push(numbers_test_procedure);
+}
+
+
+
+// Assign differen tordering for each group
+if (group == 0) {
+    timeline.push(scenario_1);
+    swiches()
+    timeline.push(scenario_2);
+    candy()
+    timeline.push(scenario_3);
+    numbers()
+    timeline.push(picture_selection);
+    timeline.push(switches_pictures);
+    timeline.push(candy_pictures);
+    timeline.push(numbers_pictures);
+  };
+  if (group == 1) {
+    timeline.push(scenario_1);
+    swiches()
+    timeline.push(scenario_2);
+    numbers()
+    timeline.push(scenario_3);
+    candy()
+    timeline.push(picture_selection);
+    timeline.push(switches_pictures);
+    timeline.push(numbers_pictures);
+    timeline.push(candy_pictures);
+  };
+  if (group == 2) {
+    timeline.push(scenario_1);
+    candy()
+    timeline.push(scenario_2);
+    swiches()
+    timeline.push(scenario_3);
+    numbers()
+    timeline.push(picture_selection);
+    timeline.push(candy_pictures);
+    timeline.push(switches_pictures);
+    timeline.push(numbers_pictures);
+  };
+  if (group == 3) {
+    timeline.push(scenario_1);
+    candy()
+    timeline.push(scenario_2);
+    numbers()
+    timeline.push(scenario_3);
+    swiches()
+    timeline.push(picture_selection);
+    timeline.push(candy_pictures);
+    timeline.push(numbers_pictures);
+    timeline.push(switches_pictures);
+  };
+
+
+  if (group == 4) {
+    timeline.push(scenario_1);
+    numbers()
+    timeline.push(scenario_2);
+    swiches()
+    timeline.push(scenario_3);
+    candy()
+    timeline.push(picture_selection);
+    timeline.push(numbers_pictures);
+    timeline.push(switches_pictures);
+    timeline.push(candy_pictures);
+  };
+  
+  if (group == 5) {
+    timeline.push(scenario_1);
+    numbers()
+    timeline.push(scenario_2);
+    candy()
+    timeline.push(scenario_3);
+    swiches()
+    timeline.push(picture_selection);
+    timeline.push(numbers_pictures);
+    timeline.push(candy_pictures);
+    timeline.push(switches_pictures);
+  };
+
+
+
+
+
+
+//TO DO:add information about the ordering to every trial.
+
+
 
 
 var debrief_block = {
