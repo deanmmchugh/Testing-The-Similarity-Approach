@@ -34,9 +34,10 @@
         // Initialise and make data display at the end.
         var jsPsych = initJsPsych({
             on_finish: function(){
-                window.location = "https://app.prolific.co/"
-            }
-            });
+            window.location = "https://app.prolific.co/"
+
+            // jsPsych.data.displayData();
+            }});
 
         // The timeline is an array that contains the set of trials we want to run in the experiment.
         var timeline = [];
@@ -46,8 +47,10 @@
             images: ['img/inst_candy.png', 'img/cut_dd.png', 'img/cut_dm.png', 'img/cut_du.png', 'img/cut_md.png', 'img/cut_mm.png', 'img/cut_mu.png', 'img/cut_ud.png', 'img/cut_um.png', 'img/cut_uu.png', 'img/c_a_b_im.png', 'img/c_a_b_q.png', 'img/c_a_s_im.png', 'img/c_a_s_q.png', 'img/c_bch_cut.png', 'img/c_bs_cut.png', 'img/c_b_b_im.png', 'img/c_b_b_q.png', 'img/c_b_ch_im.png', 'img/c_b_ch_q.png', 'img/c_b_m_im.png', 'img/c_b_m_q.png', 'img/c_b_s_im.png', 'img/c_b_s_q.png', 'img/c_chs_cut.png', 'img/c_ch_s_im.png', 'img/c_sb_cut.png', 'img/c_sm_cut.png', 'img/c_ss_cut.png', 'img/c_t1_q.png', 'img/c_t2_im.png', 'img/c_t2_q.png', 'img/c_t3_im.png', 'img/c_t3_q.png', 'img/c_t4_im.png', 'img/c_t4_q.png', 'img/c_test_im.png', 'img/c_test_q.png', 'img/c_tq_im.png', 'img/dd_q.png', 'img/dm_l.png', 'img/dm_q.png', 'img/du_l.png', 'img/du_q.png', 'img/md_l.png', 'img/md_q.png', 'img/mm_l.png', 'img/mm_q.png', 'img/mu_l.png', 'img/mu_q.png', 'img/1322.png', 'img/1324.png', 'img/1334.png', 'img/1422.png', 'img/2324.png', 'img/4334.png', 'img/n_t1_im.png', 'img/n_t1_q.png', 'img/n_t2_im.png', 'img/n_t2_q.png', 'img/n_t3_im.png', 'img/n_t3_q.png', 'img/n_t4_im.png', 'img/n_t4_q.png', 'img/n_test_im.png', 'img/n_test_q.png', 'img/ud_l.png', 'img/ud_q.png', 'img/um_l.png', 'img/um_q.png', 'img/uu_l.png', 'img/uu_q.png',] };
             timeline.push(preload);
 
-            // Get a random number between 0 and 5
-            var group = Math.floor(Math.random() * 5);
+        // Get a random number between 0 and 5 to dertermine the order of scenarios
+        var group = Math.floor(Math.random() * 5);
+
+
         var welcome = {
             type: jsPsychHtmlButtonResponse,
             stimulus: ' <p style="margin-top:2%;"><b>Welcome!</b></p><p style="font-size:100%;margin-left:10%;margin-right:10%;">We are Dean McHugh and Tomasz Klochowicz from the University of Amsterdam. At the beginning, we would like to thank you for your participation in this study. It should take you no more than 15 minutes to answer all the questions. </p> <p style="font-size:100%;margin-left:10%;margin-right:10%;">The questions do not have "right" or "wrong" answers. Some of the questions may seem similar, but please answer all of them. The survey does not aim to test your general knowledge. Some of the questions may refer to real people or events, but the stories in the questions are completely made up for the sole purpose of this survey. If a story seems false or implausible to you, try to imagine the situation described by the story. If you have any questions, you can contact us by e-mail at: t.j.klochowicz@uva.nl.</p>',
@@ -133,60 +136,60 @@
 
 timeline.push(loop_node);
 
-//     var native = {
-//         type: jsPsychSurveyMultiChoice,
-//         questions: [
-//             {
-//             prompt: "Are you a native speaker of English?", 
-//             options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
-//             required: true
-//             }   
-//         ],
-//         on_finish: function(data){
-//         // Score the response as correct or incorrect.
-//         if(data.response.Q0 == 'I am a native speaker of English.'){
-//         data.correct = true;
-//         } else {
-//         data.correct = false; 
-//         }
-//     },
-//     // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
-//     };
-//     var if_trial = {
-//         type: jsPsychHtmlKeyboardResponse,
-//         stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
-//         on_finish: function(){
-//             window.location = 'https://app.prolific.co/'
-//         },
-//     trial_duration: 5000,
-//     post_trial_gap: 1000,
-// };
+    var native = {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
+            {
+            prompt: "Are you a native speaker of English?", 
+            options: ['I am a native speaker of English.', 'I am not a native speaker of English.'],
+            required: true
+            }   
+        ],
+        on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response.Q0 == 'I am a native speaker of English.'){
+        data.correct = true;
+        } else {
+        data.correct = false; 
+        }
+    },
+    // Create a conditional trial, which displays error message when the question about the first languege is answered incorrectly and redirects back to prolific.
+    };
+    var if_trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: "<b>Only native speakers of English can participate in this study! </b> </p> <p><a href='https://app.prolific.co/'>Click here to return to Prolific.</a></p>",
+        on_finish: function(){
+            window.location = 'https://app.prolific.co/'
+        },
+    trial_duration: 5000,
+    post_trial_gap: 1000,
+};
 
-// var if_node = {
-//     timeline: [if_trial],
-//     conditional_function: function(){
-//         var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
-//         if(last_trial_correct){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-// };
-// // Push the question about the native language and redirect if wrong answer
-// var loop_node = {
-//     timeline: [native, if_node],
-//     loop_function: function(data){
-//         // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
-//         if(data.values()[0].correct){
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-//     };
+var if_node = {
+    timeline: [if_trial],
+    conditional_function: function(){
+        var last_trial_correct = jsPsych.data.get().last(1).values()[0].correct;
+        if(last_trial_correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+// Push the question about the native language and redirect if wrong answer
+var loop_node = {
+    timeline: [native, if_node],
+    loop_function: function(data){
+        // check if the answer is correct: if it is reyurn false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    };
 
-// timeline.push(loop_node);
+timeline.push(loop_node);
 
 // Create feedback trial, which will appear once a training item is answered
 var feedback = {
@@ -235,7 +238,15 @@ var indeterminate_node = {
         } else {
             return false;
         }
-    }
+    },
+    on_finish: function(data){ 
+        var last_trial_id = jsPsych.data.get().last(1).values()[0].trial_index
+        var last_trial_resp = jsPsych.data.get().last(1).values()[0].response
+        data.question_type = 'indeterminate_trial'
+        data.ordering = group
+        if(last_trial_resp = 1){
+            jsPsych.data.get().filter({trial_index: last_trial_id-1}).addToAll({indeterminate_status: data.response['Q0']});
+    }}
 };
 
 
@@ -249,7 +260,7 @@ var switches_inst = {
             stimulus:` <div >
                     <p style="text-align:center;">There are two switches, A and B, connected to a light. Part of the circuit is
                         shaded grey. Each switch has three possible positions: up, in the middle, or
-                        down. </p> 
+                        down. The current position of the switch is indicated by a green circle. </p> 
                     <p> As the wiring indicates, the light is on just in case switch A is in the
                         middle and switch B is either up or in the middle.</p> 
                         
@@ -283,83 +294,171 @@ post_trial_gap: 400
 
 // Loop the training and feedback until the correct answer is given.
 
-var switches_train = {
+var switches_train_1 = {
     type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
-    choices: ['True', 'Indeterminate','False'],
-    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
-    data: {
-        scenario: 'switches',
-        question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
-        // items: jsPsych.timelineVariable('items')
-    },
-    on_finish: function(data){
-        // Score the response as correct or incorrect.
-        if(data.response == jsPsych.timelineVariable('cor_ans')){
-        data.correct = true;
-        } 
-        else {
-        data.correct = false; 
-        }
-    }};
-
-
-var switches_train_stimuli = [
-
-{ stimulus:` 
+    stimulus:` 
  <img src='img/mu_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
 
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-switches_pos: 'mu',
-sentence_light: 'off',
-},
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
+    data: {
+        scenario: 'switches',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 2, 
+        switches_pos: 'mu',
+        sentence_light: 'off',
+        
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        data.ordering = group
+        } 
+        else {
+        data.correct = false; 
+        data.ordering = group
+        }
+    }};
 
-{ stimulus:` 
+    var switches_train_2 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
  <img src='img/dm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
 
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-switches_pos: 'dm',
-sentence_light: 'on',
-},
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
+    data: {
+        scenario: 'switches',
+        ordering: group,  
+        question_type: 'training', 
+        cor_ans: 2, 
+        switches_pos: 'dm',
+        sentence_light: 'on',
+        
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        data.ordering = group
+        } 
+        else {
+        data.correct = false; 
+        data.ordering = group
+        }
+    }};
 
-{ stimulus:` 
+    var switches_train_3 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
  <img src='img/mm_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on. </b></p>
 
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-switches_pos: 'mm',
-sentence_light: 'on',
-},
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
+    data: {
+        scenario: 'switches',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 0, 
+        switches_pos: 'mm',
+        sentence_light: 'on',
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        data.ordering = group
+        } 
+        else {
+        data.correct = false; 
+        data.ordering = group
+        }
+    }};
 
-{ stimulus:` 
+    var switches_train_4 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
  <img src='img/ud_q.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is off. </b></p>
 
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-switches_pos: 'ud',
-sentence_light: 'off',
-},
-]
+` ,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn">%choice%</button>',
+    data: {
+        scenario: 'switches',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 0, 
+        switches_pos: 'ud',
+        sentence_light: 'off',
+        // items: jsPsych.timelineVariable('items')
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        data.ordering = group
+        } 
+        else {
+        data.correct = false; 
+        data.ordering = group
+        }
+    }};
 
-var switches_train_loop = {
-    timeline: [switches_train, feedback],
-    timeline_variables: switches_train_stimuli,
-    randomize_order: true,
+var switches_train_loop_1 = {
+    timeline: [switches_train_1, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var switches_train_loop_2 = {
+    timeline: [switches_train_2, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var switches_train_loop_3 = {
+    timeline: [switches_train_3, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var switches_train_loop_4 = {
+    timeline: [switches_train_4, feedback],
+    // randomize_order: true,
     loop_function: function(data){
         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
         if(data.values()[0].correct){
@@ -382,7 +481,9 @@ var switches_test = {
     data: {
         scenario: 'switches',
         question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
+        ordering: group,
+        predicted_ans: jsPsych.timelineVariable('predicted_ans'),
+        condition: jsPsych.timelineVariable('condition')
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -402,7 +503,7 @@ var switches_test_stimuli = [
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were outside the shaded area, the light would be on. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'False',
 predicted_ans: 2,
@@ -415,7 +516,7 @@ sentence: 'If both switches were outside the shaded area, the light would be on.
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the middle, the light would be on. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'True',
 predicted_ans: 0,
@@ -428,7 +529,7 @@ sentence: 'If both switches were in the middle, the light would be on.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded area, the light would be on. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T1',
 predicted_ans: 0,
@@ -441,7 +542,7 @@ sentence: 'If switch B were in the shaded area, the light would be on.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If switch B were in the shaded area, both switches would be in the shaded area. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T2',
 predicted_ans: 0,
@@ -454,7 +555,7 @@ sentence: 'If switch B were in the shaded area, both switches would be in the sh
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded area, switch B would be in the shaded area. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T3',
 predicted_ans: 0,
@@ -467,7 +568,7 @@ sentence: 'If both switches were in the shaded area, switch B would be in the sh
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>If both switches were in the shaded area, the light would be on. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T4',
 predicted_ans: 3,
@@ -480,7 +581,7 @@ sentence: 'If both switches were in the shaded area, the light would be on.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is on just in case switch A is in the middle and switch B is up or in the middle. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F1',
 predicted_ans: 0,
@@ -492,7 +593,7 @@ sentence: 'The light is on just in case switch A is in the middle and switch B i
  <img src='img/md_l.png' style='width:90%;max-width:1000px;height:auto;margin-bottom:4%;'></img>
  <p style='margin-bottom:4%;font-size:110%;'> <b>The light is currently on. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F2',
 predicted_ans: 2,
@@ -505,7 +606,7 @@ sentence: 'The light is currently on.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently in the shaded area. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F3',
 predicted_ans: 2,
@@ -518,7 +619,7 @@ sentence: 'Switch B is currently in the shaded area.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>Switch B is currently in the middle. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F4',
 predicted_ans: 2,
@@ -531,7 +632,7 @@ sentence: 'Switch B is currently in the middle.',
  
  <p style='margin-bottom:4%;font-size:110%;'> <b>A switch is in the shaded area just in case it is up or in the middle. </b></p>
 
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F5',
 predicted_ans: 0,
@@ -613,20 +714,116 @@ post_trial_gap: 400
 
 // Loop the training and feedback until the correct answer is given.
 
-var candy_train = {
+var candy_train_1 = {
     type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
+    stimulus:` 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
+
+`,
     choices: ['True', 'Indeterminate','False'],
     button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'candy',
-        question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
-        // items: jsPsych.timelineVariable('items')
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 2, 
+        candy_pos: 'sb',
+        sentence_light: 'unhappy',
     },
     on_finish: function(data){
         // Score the response as correct or incorrect.
-        if(data.response == jsPsych.timelineVariable('cor_ans')){
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var candy_train_2 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>                 
+    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
+
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'candy',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 2, 
+        candy_pos: 'bs',
+        sentence_light: 'happy',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var candy_train_3 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'candy',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 0, 
+        candy_pos: 'ss',
+        sentence_light: 'happy',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var candy_train_4 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
+                        
+    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
+    <img src='img/c_b_ch_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'candy',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 0, 
+        candy_pos: 'bc',
+        sentence_light: 'unhappy',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
         data.correct = true;
         } 
         else {
@@ -635,66 +832,9 @@ var candy_train = {
     }};
 
 
-var candy_train_stimuli = [
-
-{ stimulus:` 
-    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
-                        
-    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-    <img src='img/c_b_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
-
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-candy_pos: 'sb',
-sentence_light: 'unhappy',
-},
-
-{ stimulus:` 
-    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>                 
-    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
-
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-candy_pos: 'bs',
-sentence_light: 'happy',
-},
-
-{ stimulus:` 
-    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
-                        
-    <img src='img/c_a_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-    <img src='img/c_b_s_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with their candy.  </b></p>
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-candy_pos: 'ss',
-sentence_light: 'happy',
-},
-
-{ stimulus:` 
-    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
-                        
-    <img src='img/c_a_b_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
-    <img src='img/c_b_ch_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are unhappy with their candy.  </b></p>
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-candy_pos: 'bc',
-sentence_light: 'unhappy',
-},
-]
-
-var candy_train_loop = {
-    timeline: [candy_train, feedback],
-    timeline_variables: candy_train_stimuli,
-    randomize_order: true,
+var candy_train_loop_1 = {
+    timeline: [candy_train_1, feedback],
+    // randomize_order: true,
     loop_function: function(data){
         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
         if(data.values()[0].correct){
@@ -704,7 +844,42 @@ var candy_train_loop = {
         }
     }
 };
-
+var candy_train_loop_2 = {
+    timeline: [candy_train_2, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var candy_train_loop_3 = {
+    timeline: [candy_train_3, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var candy_train_loop_4 = {
+    timeline: [candy_train_4, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
 // Set up candy trial but substitute the value of the parameter in from the timeline variables.
 var candy_test = {
     type: jsPsychHtmlButtonResponse,
@@ -715,7 +890,9 @@ var candy_test = {
     data: {
         scenario: 'candy',
         question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
+        ordering: group,
+        predicted_ans: jsPsych.timelineVariable('predicted_ans'),
+        condition: jsPsych.timelineVariable('condition')
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -735,7 +912,7 @@ var candy_test_stimuli = [
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had fruit-flavoured candy, they would both be happy with their candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'False',
 predicted_ans: 2,
@@ -748,7 +925,7 @@ sentence: 'If both children had fruit-flavoured candy, they would both be happy 
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children had strawberry-flavoured candy, they would both be happy with their candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'True',
 predicted_ans: 0,
@@ -760,7 +937,7 @@ sentence: 'If both children had strawberry-flavoured candy, they would both be h
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children would be happy with their candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T1',
 predicted_ans: 0,
@@ -773,7 +950,7 @@ sentence: 'If Bob’s candy were fruit-flavoured, both children would be happy w
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If Bob’s candy were fruit-flavoured, both children’s candy would be fruit-flavoured.</b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T2',
 predicted_ans: 0,
@@ -786,7 +963,7 @@ sentence: 'If Bob’s candy were fruit-flavoured, both children’s candy would 
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, Bob’s candy would be fruit-flavoured. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T3',
 predicted_ans: 0,
@@ -799,7 +976,7 @@ sentence: 'If both children’s candy were fruit-flavoured, Bob’s candy would 
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>If both children’s candy were fruit-flavoured, both children would be happy with their candy.</b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T4',
 predicted_ans: 3,
@@ -812,7 +989,7 @@ sentence: 'If both children’s candy were fruit-flavoured, both children would 
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both Alice and Bob are happy just in case Alice gets a strawberry-flavoured candy and Bob gets a fruit-flavoured candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F1',
 predicted_ans: 0,
@@ -824,13 +1001,13 @@ sentence: 'Both Alice and Bob are happy just in case Alice gets a strawberry-fla
     <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children were happy with the candy they received. </b></p>
-` , 
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Both children are happy with the candy they have. </b></p>
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F2',
 predicted_ans: 2,
 candy_pos: 'sm',
-sentence: 'Both children were happy with the candy they received.',
+sentence: 'Both children are happy with the candy they have.',
 
 },
 
@@ -838,8 +1015,8 @@ sentence: 'Both children were happy with the candy they received.',
     <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p>             
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a fruit-flavoured candy..</b></p>
-` , 
+    <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a fruit-flavoured candy.</b></p>
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F3',
 predicted_ans: 2,
@@ -852,7 +1029,7 @@ sentence: 'Bob currently has a fruit-flavoured candy.',
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Bob currently has a strawberry-flavoured candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F4',
 predicted_ans: 2,
@@ -865,7 +1042,7 @@ sentence: 'Bob currently has a strawberry-flavoured candy.',
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>The teacher’s bag contains banana-flavoured candy. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F5',
 predicted_ans: 0,
@@ -878,7 +1055,7 @@ sentence: 'The teacher’s bag contains banana-flavoured candy.',
     <img src='img/c_a_s_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img><br>
     <img src='img/c_b_m_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b>Both children currently have fruit-flavoured candy.</b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F6',
 predicted_ans: 2,
@@ -943,20 +1120,113 @@ post_trial_gap: 400
 
 // Loop the training and feedback until the correct answer is given.
 
-var numbers_train = {
+var numbers_train_1 = {
     type: jsPsychHtmlButtonResponse,
-    stimulus:jsPsych.timelineVariable('stimulus'),
+    stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>                 
+    <p>Otherwise the result is a draw.</p>
+                        
+    <img src='img/n_t1_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
+
+`,
     choices: ['True', 'Indeterminate','False'],
     button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
     data: {
         scenario: 'numbers',
-        question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
-        // items: jsPsych.timelineVariable('items')
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 0, 
+        numbers_pos: '1223',
+        sentence_light: 'win',
     },
     on_finish: function(data){
         // Score the response as correct or incorrect.
-        if(data.response == jsPsych.timelineVariable('cor_ans')){
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var numbers_train_2 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t2_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
+
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'numbers',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 2, 
+        numbers_pos: '2233',
+        sentence_light: 'not win',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var numbers_train_3 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t3_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'numbers',
+        ordering: group, 
+        question_type: 'training', 
+        cor_ans: 2, 
+        numbers_pos: '1242',
+        sentence_light: 'win',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
+        data.correct = true;
+        } 
+        else {
+        data.correct = false; 
+        }
+    }};
+
+    var numbers_train_4 = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus:` 
+    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
+    <p>Otherwise the result is a draw.</p>                  
+    <img src='img/n_t4_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
+    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
+`,
+    choices: ['True', 'Indeterminate','False'],
+    button_html: '<button class="jspsych-btn mob-btn"">%choice%</button>',
+    data: {
+        scenario: 'numbers',
+        ordering: group, 
+        cor_ans: 0, 
+        numbers_pos: '4231',
+        sentence_light: 'not win',
+    },
+    on_finish: function(data){
+        // Score the response as correct or incorrect.
+        if(data.response == data.cor_ans){
         data.correct = true;
         } 
         else {
@@ -965,64 +1235,45 @@ var numbers_train = {
     }};
 
 
-var numbers_train_stimuli = [
-
-{ stimulus:` 
-    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>                 
-    <p>Otherwise the result is a draw.</p>
-                        
-    <img src='img/n_t1_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
-
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-numbers_pos: '1223',
-sentence_light: 'win',
-},
-
-{ stimulus:` 
-    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
-    <p>Otherwise the result is a draw.</p>                  
-    <img src='img/n_t2_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
-
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-numbers_pos: '2233',
-sentence_light: 'not win',
-},
-
-{ stimulus:` 
-    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
-    <p>Otherwise the result is a draw.</p>                  
-    <img src='img/n_t3_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim has a winning hand.  </b></p>
-` , 
-question_type: 'training', 
-cor_ans: 2, 
-numbers_pos: '1242',
-sentence_light: 'win',
-},
-
-{ stimulus:` 
-    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
-    <p>Otherwise the result is a draw.</p>                  
-    <img src='img/n_t4_q.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
-    <p style='margin-bottom:4%;font-size:110%;'> <b> Kim does not have a winning hand.  </b></p>
-` , 
-question_type: 'training', 
-cor_ans: 0, 
-numbers_pos: '4231',
-sentence_light: 'not win',
-},
-]
-
-var numbers_train_loop = {
-    timeline: [numbers_train, feedback],
-    timeline_variables: numbers_train_stimuli,
-    randomize_order: true,
+var numbers_train_loop_1 = {
+    timeline: [numbers_train_1, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var numbers_train_loop_2 = {
+    timeline: [numbers_train_2, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var numbers_train_loop_3 = {
+    timeline: [numbers_train_3, feedback],
+    // randomize_order: true,
+    loop_function: function(data){
+        // check if the answer is correct: if it is return false not to repeat again, and if not repeat
+        if(data.values()[0].correct){
+            return false;
+        } else {
+            return true;
+        }
+    }
+};
+var numbers_train_loop_4 = {
+    timeline: [numbers_train_4, feedback],
+    // randomize_order: true,
     loop_function: function(data){
         // check if the answer is correct: if it is return false not to repeat again, and if not repeat
         if(data.values()[0].correct){
@@ -1043,7 +1294,9 @@ var numbers_test = {
     data: {
         scenario: 'numbers',
         question_type: jsPsych.timelineVariable('question_type'),
-        group: group,
+        ordering: group,
+        predicted_ans: jsPsych.timelineVariable('predicted_ans'),
+        condition: jsPsych.timelineVariable('condition')
         // items: jsPsych.timelineVariable('items')
     },
     on_finish: function(data){
@@ -1063,7 +1316,7 @@ var numbers_test_stimuli = [
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were 2, Kim would have a winning hand.  </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'False',
 predicted_ans: 2,
@@ -1076,7 +1329,7 @@ sentence: 'If both of Kimʼs numbers were 2, Kim would have a winning hand.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were 4, Kim would have a winning hand.  </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'True',
 predicted_ans: 0,
@@ -1089,7 +1342,7 @@ sentence: 'If both of Kimʼs numbers were 4, Kim would have a winning hand.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If Kimʼs blue number were even, Kim would have a winning hand. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T1',
 predicted_ans: 0,
@@ -1102,7 +1355,7 @@ sentence: 'If Kimʼs blue number were even, Kim would have a winning hand.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If Kimʼs blue number was even, both of Kimʼs numbers would be even. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T2',
 predicted_ans: 0,
@@ -1115,7 +1368,7 @@ sentence: 'If Kimʼs blue number was even, both of Kimʼs numbers would be even.
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were even, Kimʼs blue number would be even. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T3',
 predicted_ans: 0,
@@ -1128,7 +1381,7 @@ sentence: 'If both of Kimʼs numbers were even, Kimʼs blue number would be even
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> If both of Kimʼs numbers were even, Kim would have a winning hand. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'test', 
 condition: 'T4',
 predicted_ans: 3,
@@ -1141,7 +1394,7 @@ sentence: 'If both of Kimʼs numbers were even, Kim would have a winning hand.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> Kimʼs red number is higher than Alexʼs red number. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F1',
 predicted_ans: 0,
@@ -1154,7 +1407,7 @@ sentence: 'Kimʼs red number is higher than Alexʼs red number.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> Alex currently has a winning hand. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F2',
 predicted_ans: 2,
@@ -1168,7 +1421,7 @@ sentence: 'Alex currently has a winning hand.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs red number is even.  </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F3',
 predicted_ans: 2,
@@ -1181,7 +1434,7 @@ sentence: 'Alexʼs red number is even.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs blue number is higher than Kimʼs blue number. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F4',
 predicted_ans: 2,
@@ -1194,7 +1447,7 @@ sentence: 'Alexʼs blue number is higher than Kimʼs blue number.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> 2 is an even number. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F5',
 predicted_ans: 0,
@@ -1207,7 +1460,7 @@ sentence: '2 is an even number.',
     <p>Otherwise the result is a draw.</p>                  
     <img src='img/n_test_im.png' style='width:90%;max-width:600px;height:auto;margin-bottom:4%;'></img>
     <p style='margin-bottom:4%;font-size:110%;'> <b> Alexʼs red number is higher than Kimʼs red number. </b></p>
-` , 
+` , ordering: group, 
 question_type: 'filler', 
 condition: 'F6',
 predicted_ans: 2,
@@ -1234,28 +1487,6 @@ var numbers_test_procedure = {
 //PICTURE SELECTION
 ///////////////////////////////////////////////////
 
-// Function to highlight the pictures in the picture-choice scenario
-    function mark(picture) {
-        var image = document.getElementById(picture);
-
-        if(image.style.outlineStyle === "solid") {
-            image.style.outline = "none";
-            image.style.outlineRadius = "0px";
-        } else {
-            image.style.outline = "10px solid green";
-            image.style.borderRadius = "25px";
-        }
-    };
-    function mark_candy(picture) {
-        var image = document.getElementById(picture);
-
-        if(image.style.outlineStyle === "solid") {
-            image.style.outline = "1px dashed";
-        } else {
-            image.style.outline = "10px solid green";
-            image.style.borderRadius = "25px";
-        }
-    };
     // Function to randomise the ordering of images in the answers
     function shuffle(array) {
         let currentIndex = array.length,  randomIndex;
@@ -1274,77 +1505,7 @@ var numbers_test_procedure = {
   return array;
 }
    
-    var switches_pictures = {
-    type: jsPsychSurveyMultiSelect,
-    preamble: `
-        <p> Currently switch A is in the middle and switch B is down:</p>
-         <img src='img/cut_md.png' style='width:90%;max-width:220px;height:auto;'></img> 
-        <p> What would it look like if both switches were in the shaded area? Please click on all matching pictures. </p>
-        <p> When you are done click "Continue" at the bottom of the page.</p>
-       `,
-    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
-    questions: [{    
-    prompt: "",
-    options: shuffle([ 
-    "<img src='img/cut_uu.png' class='picture-select' id='picture1' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture1`)'></img>",
-    "<img src='img/cut_um.png' class='picture-select' id='picture2' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture2`)'></img>",
-    "<img src='img/cut_ud.png' class='picture-select' id='picture3' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture3`)'></img>",
-    "<img src='img/cut_mu.png' class='picture-select' id='picture4' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture4`)'></img>",
-    "<img src='img/cut_mm.png' class='picture-select' id='picture5' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture5`)'></img>",
-    "<img src='img/cut_md.png' class='picture-select' id='picture6' style='width:90%;max-width:220px;height:auto;margin-bottom:10%;padding:7%;'  onclick='mark(`picture6`)'></img>",
-        ]),
-    horizontal: true
-    }]};
-
-    var candy_pictures = {
-    type: jsPsychSurveyMultiSelect,
-    preamble: `
-    <p>  Alice likes strawberry-flavoured candy and does not like any other kind of candy. Bob likes all fruit-flavoured candy, but does not like any other kind of candy. </p> 
-    <p>  Alice got strawberry-flavoured candy and Bob got a mint. </p> 
-    <img src='img/c_a_s_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img><br>
-    <img src='img/c_b_m_im.png' style='width:25%;min-width:250px;height:auto;margin-bottom:4%;'></img>
-        <p> What would it look like if both of the childrenʼs candy had been fruit-flavoured? Please click on all matching pictures. </p>
-        <p> When you are done click "Continue" at the bottom of the page.</p>
-       `,
-    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
-    questions: [{    
-    prompt: "",
-    options: shuffle([ 
-    "<img src='img/c_bch_cut.png' class='picture-select' id='picture11' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture11`)'></img>",
-    "<img src='img/c_bs_cut.png' class='picture-select' id='picture12' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture12`)'></img>",
-    "<img src='img/c_sb_cut.png' class='picture-select' id='picture13' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture13`)'></img>",
-    "<img src='img/c_ss_cut.png' class='picture-select' id='picture14' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture14`)'></img>",
-    "<img src='img/c_sm_cut.png' class='picture-select' id='picture15' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture15`)'></img>",
-    "<img src='img/c_chs_cut.png' class='picture-select' id='picture16' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture16`)'></img>",
-        ]),
-    horizontal: true
-    }]};
-
-    var numbers_pictures = {
-    type: jsPsychSurveyMultiSelect,
-    preamble: `
-    <p>   A player wins just in case their red number is higher than their opponentʼs red number and their blue number is higher than their opponentʼs blue number.  </p>           
-    <p>Otherwise the result is a draw.</p>                  
-    
-        <p>  Currently the game looks as follows: </p> 
-        <img src='img/n_test_im.png' style='width:90%;max-width:400px;height:auto;margin-bottom:4%;'></img>
-        <p> What would it look like if both of Kimʼs numbers were even? Please click on all matching pictures. </p>
-        <p> When you are done click "Continue" at the bottom of the page.</p>
-       `,
-    button_html: '<button class="jspsych-btn " style="font-size:120%;margin-bottom:4%;">%choice%</button>',
-    questions: [{    
-    prompt: "",
-    options: shuffle([ 
-    "<img src='img/1322.png' class='picture-select' id='picture21' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture21`)'></img>",
-    "<img src='img/1324.png' class='picture-select' id='picture22' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture22`)'></img>",
-    "<img src='img/1334.png' class='picture-select' id='picture23' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture23`)'></img>",
-    "<img src='img/1422.png' class='picture-select' id='picture24' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture24`)'></img>",
-    "<img src='img/2324.png' class='picture-select' id='picture25' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture25`)'></img>",
-    "<img src='img/4334.png' class='picture-select' id='picture26' style='width:90%;max-width:230px;height:auto;margin-bottom:10%;padding:7%;outline:1px;outline-style:dashed;border-radius:25px;'  onclick='mark_candy(`picture26`)'></img>",
-        ]),
-    horizontal: true
-    }]};
-
+  
 
     // Scenario cards before scenarios
     var scenario_1 = {
@@ -1371,18 +1532,6 @@ var numbers_test_procedure = {
     choices: ['NO_KEYS'],
     };
 
-
-    var picture_selection = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: `
-         <p style='font-size:110%;'>Now you will revisit all the scenarios once again in a different task.</p>
-         <p style='font-size:110%;'><b>You will be asked to select some pictures.</b></p>
-
-    `,
-    choices: ['OK'],
-    button_html: '<button class="jspsych-btn" style="font-size:120%;margin-bottom:40px;">%choice%</button>',
-    post_trial_gap: 400
-    };
 
         
 // Add instructions and a delay after they appear
@@ -1426,16 +1575,13 @@ var end_feedback = {
 
 
 
-
-//TO DO:add information about the ordering to every trial.
-
-
-
-
 // Switches function
 function swiches() { 
     timeline.push(switches_inst, switches_inst_2)
-    timeline.push(switches_train_loop)
+    switches_list = shuffle([switches_train_loop_1,switches_train_loop_2,switches_train_loop_3,switches_train_loop_4])
+    for (let i = 0; i < 4; i++) {
+        timeline.push(switches_list[i])
+        }
     timeline.push(end_feedback);
     timeline.push(switches_test_procedure);
 }
@@ -1443,14 +1589,21 @@ function swiches() {
 // Candy function
 function candy(){
 timeline.push(candy_inst, candy_inst_2, candy_inst_3)
-timeline.push(candy_train_loop)
+candy_list = shuffle([candy_train_loop_1,candy_train_loop_2,candy_train_loop_3,candy_train_loop_4])
+    for (let i = 0; i < 4; i++) {
+        timeline.push(candy_list[i])
+        }
 timeline.push(end_feedback);
 timeline.push(candy_test_procedure);
 }
 
 function numbers(){
 timeline.push(numbers_inst, numbers_inst_2)
-timeline.push(numbers_train_loop)
+numbers_list = shuffle([numbers_train_loop_1,numbers_train_loop_2,numbers_train_loop_3,numbers_train_loop_4])
+    for (let i = 0; i < 4; i++) {
+        timeline.push(numbers_list[i])
+        }
+
 timeline.push(end_feedback);
 timeline.push(numbers_test_procedure);
 }
@@ -1465,10 +1618,6 @@ if (group == 0) {
     candy()
     timeline.push(scenario_3);
     numbers()
-    timeline.push(picture_selection);
-    timeline.push(switches_pictures);
-    timeline.push(candy_pictures);
-    timeline.push(numbers_pictures);
   };
   if (group == 1) {
     timeline.push(scenario_1);
@@ -1477,10 +1626,6 @@ if (group == 0) {
     numbers()
     timeline.push(scenario_3);
     candy()
-    timeline.push(picture_selection);
-    timeline.push(switches_pictures);
-    timeline.push(numbers_pictures);
-    timeline.push(candy_pictures);
   };
   if (group == 2) {
     timeline.push(scenario_1);
@@ -1489,10 +1634,6 @@ if (group == 0) {
     swiches()
     timeline.push(scenario_3);
     numbers()
-    timeline.push(picture_selection);
-    timeline.push(candy_pictures);
-    timeline.push(switches_pictures);
-    timeline.push(numbers_pictures);
   };
   if (group == 3) {
     timeline.push(scenario_1);
@@ -1501,10 +1642,6 @@ if (group == 0) {
     numbers()
     timeline.push(scenario_3);
     swiches()
-    timeline.push(picture_selection);
-    timeline.push(candy_pictures);
-    timeline.push(numbers_pictures);
-    timeline.push(switches_pictures);
   };
 
 
@@ -1515,10 +1652,6 @@ if (group == 0) {
     swiches()
     timeline.push(scenario_3);
     candy()
-    timeline.push(picture_selection);
-    timeline.push(numbers_pictures);
-    timeline.push(switches_pictures);
-    timeline.push(candy_pictures);
   };
   
   if (group == 5) {
@@ -1528,10 +1661,6 @@ if (group == 0) {
     candy()
     timeline.push(scenario_3);
     swiches()
-    timeline.push(picture_selection);
-    timeline.push(numbers_pictures);
-    timeline.push(candy_pictures);
-    timeline.push(switches_pictures);
   };
 
 
